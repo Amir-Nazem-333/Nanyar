@@ -1,161 +1,225 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl"><head><meta charset="utf-8">
+<html lang="fa" dir="rtl" data-theme="dark"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>نان‌یار | سامانهٔ هوشمند آرد و نان</title>
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet"><title>آردیار | سامانه ملی رهگیری آرد و نان</title>
 <style>
-:root{--bg:#f6f7fc;--c:#fff;--bd:#e8ebf5;--tx:#1f2544;--mu:#7b829f;--br:#4f5bd5;--br2:#eef0ff;--hd:#ffffffcc;--g1:#e4e8ff;--g2:#ffeedd;--h:linear-gradient(135deg,#eceeff,#fff 55%,#fff3e6);--sh:0 1px 2px #1f254408,0 14px 34px -18px #4f5bd54d;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-:root[data-theme=dark]{--bg:#0e1020;--c:#171a31;--bd:#272c4d;--tx:#eceefc;--mu:#9aa2c9;--br:#909aff;--br2:#242a5c;--hd:#0e1020cc;--g1:#2a2f7a66;--g2:#6b2a5533;--h:linear-gradient(135deg,#252b66,#171a31 60%,#3a2349);--sh:0 14px 34px -18px #000c;color-scheme:dark}
-body{font-family:Vazirmatn,Tahoma,sans-serif;color:var(--tx);min-height:100vh;line-height:1.75;background:radial-gradient(900px 420px at 92% -8%,var(--g1),transparent),radial-gradient(700px 360px at -4% 2%,var(--g2),transparent),var(--bg);background-attachment:fixed;transition:background .3s,color .3s}
-.card{background:var(--c);border:1px solid var(--bd);border-radius:20px;box-shadow:var(--sh)}
-.hero{background:var(--h)}.mu{color:var(--mu)}
-.btn{background:linear-gradient(135deg,#6572f0,#4651cf);color:#fff;font-weight:700;border-radius:14px;padding:.65rem 1.1rem;transition:.15s;box-shadow:0 8px 18px -10px #4f5bd5}.btn:hover{filter:brightness(1.07)}.btn:active{transform:scale(.97)}.btn.g{background:var(--c);color:var(--tx);border:1px solid var(--bd);box-shadow:none}.btn.g:hover{background:var(--br2)}
-.in{background:var(--c);border:1px solid var(--bd);border-radius:14px;padding:.62rem .85rem;width:100%;outline:none;color:var(--tx);transition:.15s}.in:focus{border-color:var(--br);box-shadow:0 0 0 4px #4f5bd52b}select.in option{background:var(--c)}
-.tg{font-size:.7rem;font-weight:600;padding:.14rem .62rem;border-radius:99px;background:color-mix(in srgb,currentColor 14%,var(--c));white-space:nowrap}
-#sb{background:var(--c);border:0;border-left:1px solid var(--bd);box-shadow:none;border-radius:0}
-.nv{display:flex;align-items:center;gap:.75rem;padding:.7rem .95rem;border-radius:14px;color:var(--mu);font-size:.9rem;transition:.15s}.nv:hover{background:var(--br2)}#sb .nv.on{background:var(--br2);color:var(--br);font-weight:700}
-#bn{background:var(--hd);backdrop-filter:blur(12px);box-shadow:0 -10px 28px -16px #4f5bd566;border-radius:0}#bn .nv{flex:1;flex-direction:column;gap:.1rem;font-size:.66rem;padding:.55rem 0;border-radius:0}#bn .nv.on{color:var(--br);font-weight:700;background:none;box-shadow:inset 0 2px 0 var(--br)}
-table{width:100%;font-size:.8rem}th{color:var(--mu);font-weight:600;text-align:right;padding:.55rem;font-size:.72rem}td{padding:.62rem .55rem;border-top:1px solid var(--bd)}tr.k{cursor:pointer;transition:.12s}tr.k:hover{background:var(--br2)}
-.ttl{font-weight:800}@keyframes u{from{opacity:0;transform:translateY(6px)}to{opacity:1}}.v>*{animation:u .35s both}
-</style></head>
-<body class="md:flex">
-<aside id="sb" class="hidden md:flex flex-col w-60 shrink-0 h-screen sticky top-0 p-4 gap-1 card !rounded-none"></aside>
-<div class="flex-1 min-w-0">
-<header class="sticky top-0 z-30 px-4 py-3 flex items-center gap-2 flex-wrap" style="background:var(--hd);backdrop-filter:blur(12px);border-bottom:1px solid var(--bd)">
-<b class="ml-2 hidden sm:block ttl">سامانهٔ ملی آرد و نان</b><select id="rs" class="in !w-auto !py-1.5 text-sm"></select><select id="bs" class="in !w-auto !py-1.5 text-sm hidden"></select><span id="st" class="mr-auto flex gap-2 items-center"></span><button id="nb" class="btn g !px-3 !py-1.5 text-sm" onclick="go('notif')">اعلان‌ها</button><button id="th" class="btn g !px-3 !py-1.5 text-sm" onclick="tth()"></button></header>
-<main id="app" class="p-4 pb-28 md:pb-8 max-w-5xl mx-auto space-y-4"></main></div>
-<nav id="bn" class="md:hidden fixed bottom-0 inset-x-0 flex card !rounded-none z-40" style="padding-bottom:env(safe-area-inset-bottom,0px)"></nav>
-<div id="ts" class="fixed top-16 inset-x-4 mx-auto max-w-sm card px-4 py-3 text-center text-sm hidden z-50"></div>
-<script>
-const $=s=>document.querySelector(s),F=n=>Number(n).toLocaleString('fa-IR',{maximumFractionDigits:1}),R2=Math.round,DAY=864e5,RATE=25000,sm=(a,k)=>a.reduce((s,x)=>s+x[k],0);
-const BR={lavash:['لواش',.10,180,15000,'#38bdf8'],taftoon:['تافتون',.14,220,25000,'#a78bfa'],barbari:['بربری',.25,350,45000,'#f5b84b'],sangak:['سنگک',.40,600,60000,'#2e9f74']},KS=Object.keys(BR);
-const IC={home:'M3 11l9-8 9 8v10H3z',box:'M4 7l8-4 8 4v10l-8 4-8-4zM4 7l8 4 8-4M12 11v10',sales:'M3 12h4l3-8 4 16 3-8h4',perf:'M4 20V10M10 20V4M16 20v-8M22 20H2',more:'M5 12h.01M12 12h.01M19 12h.01',list:'M4 6h16M4 12h16M4 18h16',shield:'M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z',globe:'M12 3a9 9 0 100 18 9 9 0 000-18zM3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18'};
-const ic=n=>`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="${IC[n]}"/></svg>`;
-function hs(s){let a=0xdeadbeef,b=0x41c6ce57;for(let i=0;i<s.length;i++){const c=s.charCodeAt(i);a=Math.imul(a^c,2654435761);b=Math.imul(b^c,1597334677)}a=Math.imul(a^a>>>16,2246822507)^Math.imul(b^b>>>13,3266489909);b=Math.imul(b^b>>>16,2246822507)^Math.imul(a^a>>>13,3266489909);return(4294967296*(2097151&b)+(a>>>0)).toString(16)}
-let CK={},S,UI={tab:'home',sel:null,q:'',fr:'',fc:'',mm:null};
-const save=()=>{CK={};try{localStorage.nanyar3=JSON.stringify(S)}catch(e){}};
-const T=(b,t,k,q,fp,o={})=>{const x={id:'TX-'+(1e5+S.n++),b:b.id,t,k,q,amt:Math.round(q*BR[k][3]*(o.pf||1)),pm:'card',fp,dev:b.id+'-D1',ses:'S'+Math.floor(t/36e5),off:0,sy:null,loc:b.city,st:'ok',...o};delete x.pf;x.h=hs(x.id+x.t+x.amt+x.k+x.q+x.fp);S.tx.push(x);return x};
-const aud=(who,act,b,bf,af)=>{S.aud.push({t:Date.now(),who,act,b,bf,af})};
-function gen(b,p,R){const m=BR[b.type],mix=.6*m[1]+.088,pr=.6*m[3]+12000,T0=new Date(Date.now()-DAY).setHours(0,0,0,0),H=h=>T0+h*36e5,fp=()=>'FP'+R2(R()*900);
- for(const k of['tx','cm','ins','ship'])S[k]=S[k].filter(x=>x.b!=b.id);
- S.days[b.id]=Array.from({length:14},(_,k)=>{const sold=R2(b.base*(.9+.2*R())),bf=sold*mix,e=k>=7?(p=='w'?.14+.04*R():p=='r'?.45+.1*R():.03+.02*R()):.03+.02*R();return{sold,bf,used:bf*(1+e),deliv:bf*(1+e)*(.97+.06*R()),rev:sold*pr}});
- for(let j=0;j<30;j++)T(b,H(6+R()*15.5),R()<.6?b.type:KS[Math.floor(R()*4)],Math.max(1,R2(b.base/30*(.6+.8*R()))),fp());
- for(let j=0;j<6;j++)T(b,H(16+j*.05),'lavash',3,fp(),{off:1,sy:'SY0'});
- if(p!='h'){const n=p=='r'?10:3,d=p=='r'?6:4;for(let j=0;j<n;j++)T(b,H(1+j*.1),'lavash',5,fp());for(let j=0;j<d;j++)T(b,H(11)+j*8e3,'barbari',4,'FPX');
-  S.cm.push({id:'C'+S.n++,b:b.id,k:b.type,type:'وزن کم',score:2,t:H(10),rp:'R1'},{id:'C'+S.n++,b:b.id,k:b.type,type:'کیفیت پایین',score:3,t:H(12),rp:'R2'});T(b,H(12),'sangak',3,fp(),{pf:1.12});}
- if(p=='r'){for(let j=0;j<8;j++)T(b,H(13.5)+j*8e2,'sangak',60,'FPY');for(let j=0;j<6;j++)T(b,H(15)+j*2e4,'taftoon',10,'FPZ');for(let j=0;j<50;j++)T(b,H(20)+j*5e3,'lavash',2,fp(),{off:1,sy:'SY1'});for(let j=0;j<4;j++)T(b,H(9+j),'barbari',3,fp(),{pf:1.12});
-  for(const[i,s]of[[3,1],[4,2],[5,1],[6,2],[7,1]])S.cm.push({id:'C'+S.n++,b:b.id,k:b.type,type:'وزن کم',score:s,t:H(8+i),rp:'R'+(i-2)},);S.cm.push({id:'C'+S.n++,b:b.id,k:b.type,type:'وزن کم',score:1,t:H(14),rp:'R1'});
-  S.ins.push({id:'I'+S.n++,b:b.id,t:H(11),k:b.type,ws:[1,2,3].map(()=>R2(m[2]*.88)),res:'ok'})}
- const sh=(st,d)=>S.ship.push({id:'FL-1405-'+(1e3+S.n++),b:b.id,fac:'کارخانه آرد نمونه',bags:20,kg:1000,t:Date.now()-d*DAY,st});sh('received',3);sh('received',1);if(b.id=='B01'||R()<.25)sh('transit',0)}
-function seed(){let r=7;const R=()=>Math.abs(r=Math.imul(r,48271)%2147483647)/2147483647,nm='آفتاب مهر گلشن بازار ایثار نور سپیده کوثر امید شقایق آزادی ولیعصر رضوی بهار هدیه پارس نیلوفر یاس سبلان سحر'.split(' '),ct=['کاشمر','مشهد','سرخس','تایباد','نیشابور','گناباد'];
- S={n:1,bk:[],days:{},tx:[],ship:[],cm:[],ins:[],cor:[],aud:[],off:{},set:{tol:5},role:'baker',me:'B01',scn:null};
- for(let i=0;i<20;i++){const c=ct[(i*5)%6],ty=KS[i%4],base=500+(i%5)*150,b={id:'B'+String(i+1).padStart(2,'0'),name:BR[ty][0]+' '+nm[i],city:c,zone:c=='سرخس'||c=='تایباد'?1:0,type:ty,base,cap:R2(base/4),owner:'مالک '+(i+1)};S.bk.push(b);gen(b,i<8?'h':i<15?'w':'r',R)}
- aud('سیستم','راه‌اندازی داده نمونه','-','-','-');save()}
-try{S=JSON.parse(localStorage.nanyar3||'null')}catch(e){}if(!S||!S.bk)seed();
-const BB=id=>S.bk.find(b=>b.id==id);
-function calc(b){const d=S.days[b.id],cr=new Set(S.tx.filter(x=>x.ref).map(x=>x.ref)),tx=S.tx.filter(x=>x.b==b.id&&x.st=='ok'&&!cr.has(x.id)).sort((a,c)=>a.t-c.t),sg=[],w=d.slice(-7),us=sm(w,'used'),bf=sm(w,'bf'),tol=S.set.tol/100,z=b.zone?1.15:1,now=Date.now();
- const A=(g,l,p,m,t)=>{p=R2(p*z);if(p>=3)sg.push({g,l,p,m,t:t||now})},mm=(us-bf)/us;
- if(mm>tol)A('flow','مغایرت مصرف آرد',Math.min(30,(mm-tol)*150),'مصرف آرد '+F(mm*100)+'٪ بیش از آرد معادل نان فروخته‌شده است.');
- else if(mm<-tol)A('flow','فروش بدون مصرف آرد',Math.min(28,(-mm-tol)*150),'نان ثبت‌شده بیش از ظرفیت آرد مصرف‌شده است.');
- const pv=sm(d.slice(-8,-1),'sold')/7,lr=d[13].sold/pv;if(lr>2.5)A('hist','جهش غیرعادی فروش',Math.min(18,8+(lr-2.5)*5),'فروش امروز '+F(lr)+' برابر میانگین هفتهٔ قبل است.');
- const g={};tx.forEach(x=>(g[x.fp+x.amt+x.q]=g[x.fp+x.amt+x.q]||[]).push(x.t));let dg=0,dt;for(const k in g){const a=g[k];if(a.length>=3&&a.at(-1)-a[0]<=18e4){dg++;dt=dt||a[0]}}
- let bu=0,bt;for(let i=0;i+4<tx.length;i+=1)if(tx[i+4].t-tx[i].t<=1e4){bu++;bt=bt||tx[i].t;i+=5}
- if(dg)A('tx','تراکنش‌های تکراری',Math.min(16,dg*5),F(dg)+' الگوی تکراری (کارت، مبلغ و تعداد مشابه در بازهٔ کوتاه).',dt);if(bu)A('tx','تراکنش‌های پشت‌سرهم',Math.min(14,bu*7),'پنج تراکنش یا بیشتر در کمتر از ۱۰ ثانیه.',bt);
- const nt=tx.filter(x=>{const h=new Date(x.t).getHours();return h<6||h>=22});if(nt.length/tx.length>.06)A('tx','تراکنش در ساعات غیرعادی',Math.min(10,nt.length/tx.length*50),F(nt.length)+' تراکنش خارج از ۶ تا ۲۲.',nt[0].t);
- const sy={};tx.filter(x=>x.off).forEach(x=>sy[x.sy]=(sy[x.sy]||0)+1);const mo=Math.max(0,...Object.values(sy));if(mo>40)A('tx','هجوم بعد از آفلاین',Math.min(12,6+(mo-40)/8),F(mo)+' تراکنش آفلاین در یک همگام‌سازی.');
- const hr={};tx.forEach(x=>hr[Math.floor(x.t/36e5)]=(hr[Math.floor(x.t/36e5)]||0)+x.q);const mh=Math.max(0,...Object.values(hr));if(mh>b.cap)A('hist','فراتر از ظرفیت ساعتی',Math.min(14,6+(mh/b.cap-1)*4),F(mh)+' نان در یک ساعت؛ ظرفیت تقریبی '+F(b.cap)+'.');
- const cs=S.cm.filter(x=>x.b==b.id),cn={};let ws=0;cs.forEach(c=>{const n=cn[c.rp]=(cn[c.rp]||0)+1;ws+=Math.pow(.4,n-1)*(5-c.score)/4});if(ws>.5)A('cons','شکایت مشتریان (وزن‌دهی‌شده)',Math.min(10,ws*2.5),F(cs.length)+' گزارش؛ تکراری‌ها با وزن کمتر.',cs.at(-1).t);
- let lw=0;S.ins.filter(x=>x.b==b.id).forEach(i=>i.ws.forEach(g=>g<BR[i.k][2]*.95&&lw++));if(lw>=2)A('cons','وزن پایین‌تر از استاندارد',Math.min(12,lw*3),F(lw)+' وزن‌کشی زیر استاندارد.');
- const pa=tx.filter(x=>Math.abs(x.amt/x.q/BR[x.k][3]-1)>.03);if(pa.length)A('cons','قیمت خارج از مصوب',Math.min(10,pa.length*2),F(pa.length)+' تراکنش با قیمت غیرمصوب.',pa[0].t);
- const co=S.cor.filter(x=>x.b==b.id).length;if(co>=2)A('ops','درخواست‌های مکرر اصلاح موجودی',Math.min(6,co*2),F(co)+' درخواست اصلاح.');
- const base=10+(b.zone?3:0),gr=new Set(sg.filter(s=>s.p>=5).map(s=>s.g)).size,cap=[35,35,58,80,100][Math.min(gr,4)],raw=base+sm(sg,'p'),score=Math.min(raw,cap),lvl=score<=20?['کم‌ریسک','#2e9f74']:score<=40?['طبیعی','#2e9f74']:score<=60?['نیازمند پایش','#d69e1f']:score<=80?['نیازمند بررسی','#e0662c']:['پرریسک','#d64550'];
- const act=score<=30?'اقدام لازم نیست.':score<=50?'پایش دوره بعد.':score<=70?'بررسی سوابق.':score<=85?'قرار گرفتن در اولویت بازرسی.':'بررسی فوری.',c=sg.filter(s=>s.g=='flow'&&s.l=='مغایرت مصرف آرد').length&&sg.some(s=>s.g=='tx'||s.l=='فراتر از ظرفیت ساعتی'),
- hum=score<=40?'مصرف آرد و فروش نان در محدوده طبیعی قرار دارد.':score<=60?'الگوی عملکرد این دوره با دوره‌های قبل متفاوت است.':score<=80?'یک مغایرت نیازمند بررسی شناسایی شده است.':'وضعیت پرداخت در حال بررسی دوره‌ای است.';
- return{score,lvl,sg:sg.sort((a,c)=>c.p-a.p),base,gr,cap:raw>cap,act,hum,div:c,perf:Math.max(0,R2(100-score*.35)),risk$:score>60?Math.max(0,sm(d,'used')-sm(d,'bf'))*RATE:0,mm,ws,cs:cs.length,tc:S.tx.filter(x=>x.b==b.id).length}}
-const rk=b=>CK[b.id]||(CK[b.id]=calc(b)),inv=b=>1500+sm(S.days[b.id],'deliv')-sm(S.days[b.id],'used');
-const toast=m=>{const t=$('#ts');t.textContent=m;t.classList.remove('hidden');clearTimeout(t.x);t.x=setTimeout(()=>t.classList.add('hidden'),2600)};
-const fT=t=>new Date(t).toLocaleString('fa-IR',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}),tg=(l,c)=>`<span class="tg" style="color:${c}">${l}</span>`;
-const ring=(v,c,s=120)=>{const r=52,C=2*Math.PI*r;return`<svg viewBox="0 0 130 130" width="${s}" height="${s}"><circle cx="65" cy="65" r="${r}" stroke="var(--bd)" stroke-width="11" fill="none"/><circle cx="65" cy="65" r="${r}" stroke="${c}" stroke-width="11" fill="none" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C*(1-v/100)}" transform="rotate(-90 65 65)"/><text x="65" y="75" text-anchor="middle" font-size="32" font-weight="800" fill="currentColor" font-family="Vazirmatn">${F(v)}</text></svg>`};
-const kp=(a,b,c='',s='')=>`<div class="card p-4"><div class="text-xs mu">${a}</div><div class="text-xl ttl mt-1" style="color:${c}">${b}</div>${s?`<div class="text-xs mu mt-1">${s}</div>`:''}</div>`;
-const bar=(v,c)=>`<div class="h-2 rounded-full" style="background:var(--bd)"><div class="h-2 rounded-full" style="width:${v}%;background:${c}"></div></div>`;
-const line=(a,c,mx)=>a.map((v,i)=>`${i*(300/(a.length-1))},${85-v/mx*75}`).join(' '),pl=(a,c,mx)=>`<polyline points="${line(a,c,mx)}" fill="none" stroke="${c}" stroke-width="2.5" stroke-linejoin="round"/>`;
-const N={baker:[['home','خانه','home'],['flour','آرد','box'],['sales','فروش','sales'],['perf','عملکرد','perf'],['more','بیشتر','more']],manager:[['dash','داشبورد','perf'],['list','نانوایی‌ها','list'],['insp','بازرسی','shield'],['nat','ملی','globe'],['more','بیشتر','more']],inspector:[['insp','بازرسی','shield'],['list','نانوایی‌ها','list'],['more','بیشتر','more']]},RN={baker:'نانوا',manager:'مدیر شهرستان',inspector:'بازرس'};
-const me=()=>BB(S.me),go=(t,s)=>{UI.tab=t;if(s)UI.sel=s;UI.mm=null;render();scrollTo(0,0)};
-function sale(b,k,q,o={}){const d=S.days[b.id][13];T(b,Date.now(),k,q,'FP'+R2(Math.random()*900),o);d.sold+=q;d.bf+=q*BR[k][1];d.rev+=q*BR[k][3]}
-const V={
-home(){const b=me(),r=rk(b),d=S.days[b.id][13],ps=S.ship.filter(x=>x.b==b.id&&x.st=='transit'),ob=1500+sm(S.days[b.id].slice(0,13),'deliv')-sm(S.days[b.id].slice(0,13),'used');
- return`<div class="card hero p-5 flex items-center gap-4">${ring(r.perf,r.lvl[1])}<div><div class="text-xs mu">${b.name} · ${b.city}</div><div class="text-xl font-extrabold" style="color:${r.lvl[1]}">${r.score<=40?'نانوایی خوش‌عملکرد':r.lvl[0]}</div><div class="text-sm mu mt-1">${r.hum}</div></div></div>
-<div class="grid grid-cols-2 md:grid-cols-4 gap-3">${kp('آرد ابتدای دوره',F(ob)+' کیلو')}${kp('آرد تحویل‌شده',F(d.deliv)+' کیلو')}${kp('آرد مصرف‌شده',F(d.used)+' کیلو')}${kp('آرد باقی‌مانده',F(inv(b))+' کیلو')}${kp('نان فروخته‌شده',F(d.sold))}${kp('فروش امروز',F(d.rev)+' ریال')}</div>
-<div class="grid md:grid-cols-2 gap-4">${rec(b)}${c7(b)}</div><div class="card p-5"><div class="font-bold mb-2">امروز چه کاری لازم است؟</div>${ps.length?ps.map(p=>`<div class="flex items-center justify-between gap-3 flex-wrap"><div><b>محموله ${p.id}</b><div class="text-xs mu">${F(p.kg)} کیلو · ${F(p.bags)} کیسه</div></div><button class="btn" onclick="recv('${p.id}')">تأیید دریافت</button></div>`).join(''):'<div class="font-bold" style="color:#2e9f74">✓ کار خاصی لازم نیست</div><div class="text-sm mu">عملکرد نانوایی شما طبیعی است.</div>'}</div>`},
-flour(){const b=me(),ps=S.ship.filter(x=>x.b==b.id).sort((a,c)=>c.t-a.t),sc={transit:['در مسیر','#d69e1f'],received:['تحویل‌شده','#2e9f74'],mismatch:['مغایرت‌دار','#e0662c']};
- return`<div class="space-y-3">${ps.map(p=>`<div class="card p-4"><div class="flex justify-between flex-wrap gap-2"><b dir="ltr">${p.id}</b>${tg(sc[p.st][0],sc[p.st][1])}</div><div class="text-sm mu mt-2 leading-7">${p.fac} · آرد یارانه‌ای · ${F(p.bags)} کیسه · ${F(p.kg)} کیلو<br>ارسال: ${fT(p.t)}${p.real?' · مقدار گزارشی: '+F(p.real)+' کیلو':''}</div>${p.st=='transit'?(UI.mm==p.id?`<div class="flex gap-2 mt-3"><input id="mq" class="in" inputmode="numeric" placeholder="مقدار واقعی تقریبی (کیلو)"><input id="mn" class="in" placeholder="توضیح اختیاری"><button class="btn" onclick="recv('${p.id}',1)">ثبت</button></div>`:`<div class="flex gap-2 mt-3"><button class="btn flex-1" onclick="recv('${p.id}')">دریافت شد</button><button class="btn g flex-1" onclick="UI.mm='${p.id}';render()">مغایرت دارد</button></div>`):''}</div>`).join('')}</div><div class="text-xs mu">مقدار مورد انتظار از اطلاعات محموله گرفته می‌شود و توسط نانوا قابل تغییر نیست. موجودی هم خودکار محاسبه می‌شود.</div>`},
-sales(){const b=me(),q=(S.off[b.id]||[]).length,tx=S.tx.filter(x=>x.b==b.id&&x.t>Date.now()-3*DAY).sort((a,c)=>c.t-a.t).slice(0,8),cr=new Set(S.tx.filter(x=>x.ref).map(x=>x.ref));
- return`<div class="card p-4 space-y-3"><div class="font-bold">کارت‌خوان نمایشی</div><div class="text-xs mu">در نسخهٔ واقعی تراکنش‌ها خودکار از کارت‌خوان می‌آیند؛ نانوا چیزی وارد نمی‌کند.</div><div class="flex gap-2 flex-wrap"><button class="btn" onclick="pos(5)">۵ فروش عادی</button><button class="btn g" onclick="pos(40)">۴۰ فروش</button><button class="btn g" onclick="tgo()">${S.offl?'اتصال دوباره به اینترنت':'قطع اینترنت'}</button></div>${S.offl||q?`<div class="text-sm" style="color:#e0662c">حالت آفلاین: تراکنش‌ها موقتاً ذخیره می‌شوند (${F(q)} در صف).</div>`:''}</div>
-${hrs(b)}<div class="card p-4 overflow-x-auto"><table><tr><th>شناسه</th><th>زمان</th><th>نان</th><th>تعداد</th><th>مبلغ</th><th>هش</th><th></th></tr>${tx.map(x=>`<tr><td dir="ltr">${x.id}</td><td>${fT(x.t)}</td><td>${BR[x.k][0]}</td><td>${F(x.q)}</td><td>${F(x.amt)}</td><td dir="ltr" class="mu">${x.h.slice(0,6)}</td><td>${x.ref?tg('اصلاحیه','#8fa1c8'):cr.has(x.id)?tg('اصلاح‌شده','#8fa1c8'):`<button class="tg" onclick="corr('${x.id}')">اصلاح</button>`}</td></tr>`).join('')}</table><div class="text-xs mu mt-2">تراکنش‌ها قفل و تغییرناپذیرند. اصلاح یعنی ثبت یک تراکنش جدید با ارجاع؛ اصل هرگز حذف نمی‌شود.</div></div>`},
-perf(){const b=me(),r=rk(b),good=r.score<=25;return`<div class="grid md:grid-cols-2 gap-4"><div class="card hero p-5 flex gap-4 items-center">${ring(r.perf,r.lvl[1])}<div><div class="text-xs mu">امتیاز عملکرد</div><div class="text-xl font-extrabold" style="color:${r.lvl[1]}">${good?'سطح اعتماد بالا':r.lvl[0]}</div><div class="text-sm mu mt-1">${r.hum}</div></div></div>
-<div class="card p-5"><div class="font-bold mb-2">مزایای سطح اعتماد</div>${['بازرسی کمتر و هدفمندتر','بررسی سریع‌تر','اولویت خدمات','سابقهٔ عملکرد مثبت','امکان افزایش سهمیه بر پایهٔ تقاضای واقعی'].map(t=>`<div class="text-sm py-1 ${good?'':'opacity-40'}">${good?'✓':'○'} ${t}</div>`).join('')}</div></div>
-<div class="grid grid-cols-3 gap-3">${kp('شکایت ثبت‌شده',F(r.cs))}${kp('تراکنش اخیر',F(r.tc))}${kp('وضعیت پرداخت',r.score>60?'در حال بررسی دوره‌ای':'عادی',r.score>60?'#e0662c':'#2e9f74')}</div>`},
-more(){const b=me(),sc=S.scn,mg=S.role=='manager';return`<div class="grid md:grid-cols-2 gap-4"><div class="card p-4 space-y-3"><div class="font-bold">اجرای سناریوی نمونه (روی ${b.name})</div><div class="flex gap-2 flex-wrap"><button class="btn" onclick="scn('h')">نانوایی سالم</button><button class="btn g" onclick="scn('m')">مغایرت آرد</button><button class="btn g" onclick="scn('f')">تراکنش صوری</button></div>${sc?`<div class="space-y-2">${sc.steps.map(s=>`<div class="flex justify-between text-sm"><span>${s.l}</span><b style="color:${s.c}">${F(s.r)}</b></div>`).join('')}<button class="text-emerald-500 text-sm underline" onclick="UI.role='manager';S.role='manager';go('file','${sc.b}')">مشاهدهٔ پرونده ۳۶۰</button></div>`:''}</div>
-<div class="card p-4 space-y-2"><div class="font-bold">درخواست اصلاح موجودی</div><input id="ck" class="in" inputmode="numeric" placeholder="مقدار پیشنهادی (کیلو)"><button class="btn" onclick="cor()">ثبت درخواست</button><div class="text-xs mu">موجودی دستی تغییر نمی‌کند؛ فقط درخواست در دفتر ممیزی ثبت می‌شود.</div></div>
-<div class="card p-4 space-y-2"><div class="font-bold">گزارش مشتری</div><div class="flex gap-2"><select id="cb" class="in">${KS.map(k=>`<option value="${k}">${BR[k][0]}</option>`).join('')}</select><select id="ct" class="in">${['وزن کم','کیفیت پایین','قیمت','رفتار','سایر'].map(t=>`<option>${t}</option>`).join('')}</select><select id="cs" class="in">${[1,2,3,4,5].map(n=>`<option>${n}</option>`).join('')}</select></div><button class="btn" onclick="cmp()">ثبت</button></div>
-<div class="card p-4 space-y-2"><div class="font-bold">تنظیمات</div><label class="text-sm mu">تلورانس طبیعی (٪)</label><input id="tl" class="in" inputmode="numeric" value="${S.set.tol}" ${mg?'':'disabled'} onchange="S.set.tol=+this.value||5;aud('مدیر','تغییر تلورانس','-','-',S.set.tol);save();toast('ذخیره شد')"><button class="btn g" onclick="try{localStorage.removeItem('nanyar3')}catch(e){}seed();UI.tab='more';render();toast('بازنشانی شد')">بازنشانی Demo</button></div></div>
-<div class="card p-4 overflow-x-auto"><div class="font-bold mb-2">دفتر ممیزی</div><table><tr><th>زمان</th><th>چه کسی</th><th>اقدام</th><th>نانوایی</th><th>قبل</th><th>بعد</th></tr>${S.aud.slice(-8).reverse().map(a=>`<tr><td>${fT(a.t)}</td><td>${a.who}</td><td>${a.act}</td><td>${a.b}</td><td>${a.bf}</td><td>${a.af}</td></tr>`).join('')}</table></div>`},
-dash(){const A=S.bk.map(b=>({b,r:rk(b)})),tot=(k)=>S.bk.reduce((s,b)=>s+sm(S.days[b.id].slice(-7),k),0),dy=Array.from({length:14},(_,i)=>S.bk.reduce((s,b)=>s+S.days[b.id][i].sold,0)),at=sm(A.map(x=>({v:x.r.risk$})),'v'),ok=A.filter(x=>x.r.score<=40).length;
- return`<div class="card p-5" style="border-color:#d6455066"><div class="text-xs mu">پول در معرض ریسک</div><div class="text-3xl font-extrabold ttl" style="color:#d64550">${F(at/1e6)} <span class="text-sm">میلیون ریال</span></div><div class="text-xs mu mt-1">مغایرت جدی در نانوایی‌های با ریسک بالای ۶۰ (نرخ نمونه ${F(RATE)} ریال/کیلو)</div></div>
-<div class="grid grid-cols-2 md:grid-cols-4 gap-3">${kp('نانوایی‌ها',F(S.bk.length))}${kp('آرد توزیع‌شده (۷ روز)',F(tot('deliv')/1000)+' تن')}${kp('نان فروخته‌شده',F(tot('sold')))}${kp('یارانهٔ تخمینی',F(tot('deliv')*RATE/1e6)+' م.ریال')}${kp('نرخ تطبیق',F(ok/A.length*100)+'٪','#2e9f74')}${kp('پرریسک',F(A.filter(x=>x.r.score>60).length),'#d64550')}${kp('شکایات',F(S.cm.length))}${kp('بازرسی ضروری',F(A.filter(x=>x.r.score>70).length),'#e0662c')}</div>
-${heat(A)}<div class="grid md:grid-cols-2 gap-4"><div class="card p-4"><div class="font-bold mb-2">فروش ۱۴ روز</div><svg viewBox="0 0 300 90" class="w-full">${pl(dy,'#2e9f74',Math.max(...dy))}</svg></div><div class="card p-4"><div class="font-bold mb-3">اولویت بازرسی</div>${pri(5)}</div></div>`},
-nat(){const A=S.bk.map(b=>({b,r:rk(b)})),z=[0,1].map(zn=>{const a=A.filter(x=>x.b.zone==zn);return[zn?'پرریسک':'عادی',a.reduce((s,x)=>s+x.r.score,0)/a.length]}),ct=[...new Set(S.bk.map(b=>b.city))].map(c=>{const a=A.filter(x=>x.b.city==c);return[c,a.reduce((s,x)=>s+x.r.score,0)/a.length]});
- return`<div class="grid grid-cols-2 md:grid-cols-4 gap-3">${kp('کل آرد',F(S.bk.reduce((s,b)=>s+sm(S.days[b.id],'deliv'),0)/1000)+' تن')}${kp('کل نان',F(S.bk.reduce((s,b)=>s+sm(S.days[b.id],'sold'),0)))}${kp('یارانه در معرض ریسک',F(sm(A.map(x=>({v:x.r.risk$})),'v')/1e6)+' م.ریال','#d64550')}${kp('نانوایی‌های سالم',F(A.filter(x=>x.r.score<=40).length/A.length*100)+'٪','#2e9f74')}</div>
-<div class="grid md:grid-cols-2 gap-4"><div class="card p-4 space-y-3"><div class="font-bold">میانگین ریسک بر پایهٔ شهر</div>${ct.map(([n,v])=>`<div><div class="flex justify-between text-sm"><span>${n}</span><b>${F(v)}</b></div>${bar(v,v>60?'#e0662c':v>40?'#d69e1f':'#2e9f74')}</div>`).join('')}</div><div class="card p-4 space-y-3"><div class="font-bold">مناطق</div>${z.map(([n,v])=>`<div><div class="flex justify-between text-sm"><span>${n}</span><b>${F(v)}</b></div>${bar(v,'#2e9f74')}</div>`).join('')}<div class="text-xs mu">در مناطق پرریسک فقط وزن سیگنال‌ها ۱۵٪ بیشتر است؛ نانوایی خودکار متهم نمی‌شود.</div></div></div>${sub(A)}`},
-list(){const q=UI.q.trim(),L=S.bk.filter(b=>(!q||b.name.includes(q)||b.id.toLowerCase().includes(q.toLowerCase())||S.ship.some(s=>s.b==b.id&&s.id.includes(q))||S.tx.some(x=>x.b==b.id&&x.id.includes(q)))&&(!UI.fc||b.city==UI.fc)&&(!UI.fr||({l:r=>r<=40,m:r=>r>40&&r<=60,h:r=>r>60})[UI.fr](rk(b).score))).sort((a,c)=>rk(c).score-rk(a).score);
- return`<div class="card p-3 flex gap-2 flex-wrap"><input class="in flex-1" style="min-width:160px" placeholder="جستجو: نام، کد نانوایی، کد محموله، شناسه تراکنش" value="${UI.q}" oninput="UI.q=this.value;render(1)"><select class="in !w-auto" onchange="UI.fr=this.value;render()"><option value="">همهٔ ریسک‌ها</option><option value="l" ${UI.fr=='l'?'selected':''}>۰–۴۰</option><option value="m" ${UI.fr=='m'?'selected':''}>۴۱–۶۰</option><option value="h" ${UI.fr=='h'?'selected':''}>بالای ۶۰</option></select><select class="in !w-auto" onchange="UI.fc=this.value;render()"><option value="">همهٔ شهرها</option>${[...new Set(S.bk.map(b=>b.city))].map(c=>`<option ${UI.fc==c?'selected':''}>${c}</option>`).join('')}</select></div>
-<div class="card p-3 overflow-x-auto"><table><tr><th>کد</th><th>نانوایی</th><th>شهر</th><th>ریسک</th><th>وضعیت</th><th>اقدام پیشنهادی</th></tr>${L.map(b=>{const r=rk(b);return`<tr class="k" onclick="go('file','${b.id}')"><td>${b.id}</td><td><b>${b.name}</b></td><td>${b.city}${b.zone?' '+tg('پرریسک','#e0662c'):''}</td><td style="min-width:90px"><b style="color:${r.lvl[1]}">${F(r.score)}</b>${bar(r.score,r.lvl[1])}</td><td>${tg(r.lvl[0],r.lvl[1])}</td><td>${r.act}</td></tr>`}).join('')}</table></div>`},
-insp(){return`<div class="text-sm mu">فهرست اولویت را سیستم می‌سازد؛ بازرس خودش مقصد را انتخاب نمی‌کند. تصمیم نهایی با انسان است و جریمهٔ خودکار وجود ندارد.</div><div class="space-y-3">${pri(8)}</div>`},
-file(){const b=BB(UI.sel),r=rk(b),d=S.days[b.id],ev=[];S.ship.filter(x=>x.b==b.id).forEach(x=>ev.push([x.t,'محموله '+x.id+(x.st=='transit'?' ارسال شد':' دریافت شد'),'#2e9f74']));S.cm.filter(x=>x.b==b.id).forEach(x=>ev.push([x.t,'شکایت: '+x.type+' (امتیاز '+x.score+')','#d69e1f']));S.ins.filter(x=>x.b==b.id).forEach(x=>ev.push([x.t,'بازرسی: '+x.ws.length+' وزن‌کشی ثبت شد','#38bdf8']));S.aud.filter(x=>x.b==b.id).forEach(x=>ev.push([x.t,x.who+': '+x.act,'#a78bfa']));r.sg.forEach(s=>ev.push([s.t,'سیگنال: '+s.l,'#e0662c']));ev.sort((a,c)=>c[0]-a[0]);
- const tx=S.tx.filter(x=>x.b==b.id).sort((a,c)=>c.t-a.t).slice(0,8),mx=Math.max(...d.map(x=>x.used),...d.map(x=>x.bf));
- return`<button class="text-sm mu" onclick="go('list')">← بازگشت</button><div class="card hero p-5 flex gap-4 items-center flex-wrap">${ring(r.score,r.lvl[1])}<div class="flex-1"><div class="text-xs mu">${b.id} · ${b.city} · ${b.owner}${b.zone?' · منطقهٔ پرریسک':''}</div><div class="text-xl font-extrabold">${b.name}</div><div class="mt-1">${tg(r.lvl[0],r.lvl[1])} ${r.div?tg('ریسک انحراف آرد','#d64550'):''}</div><div class="text-sm mt-2"><b>اقدام پیشنهادی:</b> ${r.act}</div></div></div>
-<div class="grid md:grid-cols-2 gap-4"><div class="card p-4"><div class="font-bold mb-2">امتیاز ریسک ${F(r.score)} · دلایل</div><div class="text-sm space-y-1.5"><div class="flex justify-between"><span>پایهٔ ریسک${b.zone?' (منطقه)':''}</span><b>+${F(r.base)}</b></div>${r.sg.map(s=>`<div><div class="flex justify-between"><span style="color:${s.p>=15?'#d64550':s.p>=8?'#e0662c':'#d69e1f'}">${s.l}</span><b>+${F(s.p)}</b></div><div class="text-xs mu">${s.m}</div></div>`).join('')||'<div class="mu text-xs">سیگنالی وجود ندارد.</div>'}</div><div class="text-xs mu mt-3">سیگنال‌های مستقل: ${F(r.gr)}. ${r.cap?'سقف امتیاز به‌دلیل تعداد کم سیگنال مستقل اعمال شد.':''} امتیاز دستی قابل ویرایش نیست.</div></div>
-<div class="card p-4"><div class="font-bold mb-2">آرد مصرفی و آرد معادل نان (۱۴ روز)</div><svg viewBox="0 0 300 90" class="w-full">${pl(d.map(x=>x.used),'#d64550',mx)}${pl(d.map(x=>x.bf),'#2e9f74',mx)}</svg><div class="text-xs mu"><span style="color:#d64550">● مصرف ثبت‌شده</span> · <span style="color:#2e9f74">● معادل نان فروخته‌شده</span></div><div class="grid grid-cols-2 gap-2 mt-3 text-sm"><div>موجودی: <b>${F(inv(b))} کیلو</b></div><div>شکایت: <b>${F(r.cs)}</b></div></div></div></div>
-${peer(b,r)}${brief(r)}<div class="card p-4"><div class="font-bold mb-3">تایم‌لاین</div><div class="space-y-3 border-r-2 pr-4" style="border-color:var(--bd)">${ev.slice(0,9).map(e=>`<div class="relative"><i class="absolute w-3 h-3 rounded-full" style="background:${e[2]};right:-23px;top:5px"></i><div class="text-sm">${e[1]}</div><div class="text-xs mu">${fT(e[0])}</div></div>`).join('')}</div></div>
-<div class="card p-4 space-y-2">${S.role=='inspector'?`<div class="font-bold">ثبت بازرسی (وزن‌کشی)</div><div class="flex gap-2"><select id="ik" class="in">${KS.map(k=>`<option value="${k}">${BR[k][0]} (استاندارد ${F(BR[k][2])}گ)</option>`).join('')}</select><input id="ig" class="in" inputmode="numeric" placeholder="وزن (گرم)"><button class="btn" onclick="addIns('${b.id}')">ثبت</button></div>`:`<div class="font-bold">ثبت تصمیم انسانی</div><div class="flex gap-2"><select id="dc" class="in"><option>عدم نیاز به اقدام</option><option>پایش دوره بعد</option><option>بررسی سوابق</option><option>ارجاع به بازرسی</option></select><button class="btn" onclick="dec('${b.id}')">ثبت</button></div>`}</div>
-<div class="card p-4 overflow-x-auto"><div class="font-bold mb-2">تراکنش‌های اخیر</div><table><tr><th>شناسه</th><th>زمان</th><th>نان</th><th>تعداد</th><th>پرداخت</th><th>اثر</th><th>حالت</th></tr>${tx.map(x=>`<tr><td dir="ltr">${x.id}</td><td>${fT(x.t)}</td><td>${BR[x.k][0]}</td><td>${F(x.q)}</td><td dir="ltr" class="mu">${x.fp}</td><td dir="ltr" class="mu">${x.h.slice(0,6)}</td><td>${x.off?'آفلاین':'آنلاین'}</td></tr>`).join('')}</table></div>`}};
-function pri(n){return S.bk.map(b=>({b,r:rk(b)})).filter(x=>x.r.score>=41).sort((a,c)=>c.r.score-a.r.score).slice(0,n).map((x,i)=>`<div class="card p-3 cursor-pointer" onclick="go('file','${x.b.id}')"><div class="flex justify-between"><b>${F(i+1)}. ${x.b.name}</b><b style="color:${x.r.lvl[1]}">${F(x.r.score)}</b></div><div class="text-xs mu mt-1">${x.r.sg.slice(0,2).map(s=>s.l).join(' · ')} — ${x.r.act}</div></div>`).join('')||'<div class="mu text-sm">مورد پرریسکی وجود ندارد.</div>'}
-function recv(id,mm){const p=S.ship.find(x=>x.id==id),b=BB(p.b),d=S.days[b.id][13];if(mm){const q=+$('#mq').value;if(!(q>0))return toast('مقدار تقریبی را وارد کنید');p.st='mismatch';p.real=q;d.deliv+=q;aud('نانوا','مغایرت محموله '+id+($('#mn').value?' ('+$('#mn').value+')':''),b.id,F(p.kg),F(q))}else{p.st='received';d.deliv+=p.kg;aud('نانوا','تأیید دریافت '+id,b.id,'در مسیر','تحویل‌شده')}UI.mm=null;save();toast('ثبت شد');render()}
-function pos(n){const b=me();for(let i=0;i<n;i++){const k=KS[Math.floor(Math.random()*4)],q=1+R2(Math.random()*8);if(S.offl){const x=T(b,Date.now()+i,k,q,'FP'+R2(Math.random()*900),{off:1,sy:'Q'});S.tx.pop();(S.off[b.id]=S.off[b.id]||[]).push(x)}else{sale(b,k,q);S.days[b.id][13].used+=q*BR[k][1]*1.03}}save();render()}
-function tgo(){const b=me();if(S.offl){S.offl=0;const q=S.off[b.id]||[],sy='SY'+Date.now();q.forEach(x=>{x.sy=sy;x.h=hs(x.id+x.t+x.amt+x.k+x.q+x.fp);S.tx.push(x);const d=S.days[b.id][13];d.sold+=x.q;d.bf+=x.q*BR[x.k][1];d.rev+=x.amt;d.used+=x.q*BR[x.k][1]*1.03});S.off[b.id]=[];toast(F(q.length)+' تراکنش همگام شد')}else{S.offl=1;toast('حالت آفلاین')}save();render()}
-function corr(id){const o=S.tx.find(x=>x.id==id),b=BB(o.b);T(b,Date.now(),o.k,-o.q,o.fp,{ref:id,st:'corr'});const d=S.days[b.id][13];d.sold-=o.q;d.bf-=o.q*BR[o.k][1];d.rev-=o.amt;aud('نانوا','اصلاحیهٔ '+id,b.id,F(o.q),'0');save();render()}
-function cor(){const v=+$('#ck').value;if(!(v>=0)||$('#ck').value==='')return toast('عدد را وارد کنید');S.cor.push({b:S.me,v,t:Date.now()});aud('نانوا','درخواست اصلاح موجودی',S.me,F(inv(me())),F(v));save();toast('درخواست ثبت شد');render()}
-function cmp(){S.cm.push({id:'C'+S.n++,b:S.me,k:$('#cb').value,type:$('#ct').value,score:+$('#cs').value,t:Date.now(),rp:'R'+R2(Math.random()*4)});save();toast('گزارش ثبت شد');render()}
-function addIns(id){const g=+$('#ig').value;if(!(g>0))return toast('وزن را وارد کنید');S.ins.push({id:'I'+S.n++,b:id,t:Date.now(),k:$('#ik').value,ws:[g],res:'ok'});aud('بازرس','ثبت وزن‌کشی',id,'-',F(g)+'گ');save();toast('ثبت شد');render()}
-function dec(id){aud('مدیر','تصمیم: '+$('#dc').value,id,F(rk(BB(id)).score),F(rk(BB(id)).score));save();toast('تصمیم در دفتر ممیزی ثبت شد');render()}
-function scn(t){const b=me(),R=(()=>{let r=Date.now()%1e6+1;return()=>Math.abs(r=Math.imul(r,48271)%2147483647)/2147483647})();gen(b,'h',R);S.scn={b:b.id,steps:[]};const d=S.days[b.id],H=h=>new Date(Date.now()-DAY).setHours(h,0,0,0),mk=(l)=>()=>{save();const r=rk(b);S.scn.steps.push({l,r:r.score,c:r.lvl[1]});render()},ml=m=>{d.slice(-7).forEach(x=>x.used=x.bf*(1+m))};
- const P={h:[[0,'وضعیت پایه: رفتار طبیعی']],m:[[0,'وضعیت پایه'],[()=>ml(.2),'مصرف ۲۰٪ بالاتر از فروش'],[()=>{ml(.35);S.cm.push({id:'C'+S.n++,b:b.id,k:b.type,type:'وزن کم',score:1,t:Date.now(),rp:'R7'},{id:'C'+S.n++,b:b.id,k:b.type,type:'وزن کم',score:2,t:Date.now(),rp:'R8'},{id:'C'+S.n++,b:b.id,k:b.type,type:'کیفیت پایین',score:1,t:Date.now(),rp:'R9'})},'مغایرت ۳۵٪ + شکایت‌ها'],[()=>{ml(.5);S.ins.push({id:'I'+S.n++,b:b.id,t:Date.now(),k:b.type,ws:[1,2,3].map(()=>R2(BR[b.type][2]*.88)),res:'ok'})},'مغایرت ۵۰٪ + وزن پایین بازرسی'],[()=>{for(let j=0;j<6;j++)T(b,H(15)+j*2e4,'taftoon',10,'FPQ');ml(.55)},'تراکنش‌های تکراری هم‌زمان']],
- f:[[0,'وضعیت پایه'],[()=>{for(let j=0;j<8;j++)T(b,H(13)+j*8e2,'sangak',60,'FPY')},'هجوم تراکنش در چند ثانیه'],[()=>{for(let j=0;j<6;j++)T(b,H(15)+j*2e4,'taftoon',10,'FPZ')},'کارت و مبلغ تکراری'],[()=>{for(let j=0;j<10;j++)T(b,H(1+j*.1),'lavash',5,'FP'+j)},'تراکنش نیمه‌شب'],[()=>{for(let j=0;j<50;j++)T(b,H(20)+j*5e3,'lavash',2,'FQ'+j,{off:1,sy:'SYX'});d[13].sold*=3.2},'همگام‌سازی انبوه آفلاین + جهش فروش']]}[t];
- P.forEach(([fn,l],i)=>setTimeout(()=>{if(fn)fn();mk(l)()},i*1000+50));aud('دمو','سناریو '+t,b.id,'-','-');save();render()}
-function render(keep){S.role=S.role||'baker';$('#th').textContent=TH=='dark'?'☀ روشن':'☾ تیره';$('#nb').textContent='اعلان‌ها · '+F(nt().length);const nv=N[S.role],on=UI.tab=='file'?'list':UI.tab;if(!nv.some(n=>n[0]==UI.tab)&&!['file','notif'].includes(UI.tab))UI.tab=nv[0][0];
- const tv=S.tx.every(x=>x.h==hs(x.id+x.t+x.amt+x.k+x.q+x.fp));$('#st').innerHTML=tg(tv?'دفتر سالم':'دستکاری',tv?'#2e9f74':'#d64550')+(S.offl?tg('آفلاین','#e0662c'):'');
- $('#rs').innerHTML=Object.keys(RN).map(r=>`<option value="${r}" ${r==S.role?'selected':''}>${RN[r]}</option>`).join('');$('#rs').onchange=e=>{S.role=e.target.value;UI.tab=N[S.role][0][0];save();render()};
- const bs=$('#bs');bs.classList.toggle('hidden',S.role!='baker');bs.innerHTML=S.bk.map(b=>`<option value="${b.id}" ${b.id==S.me?'selected':''}>${b.name} · ${b.city}</option>`).join('');bs.onchange=e=>{S.me=e.target.value;S.offl=0;save();render()};
- const L=nv.map(([k,n,i])=>`<button class="nv ${k==on?'on':''}" onclick="go('${k}')">${ic(i)}<span>${n}</span></button>`).join('');$('#bn').innerHTML=L;$('#sb').innerHTML=`<div class="flex items-center gap-2 mb-4"><div class="w-9 h-9 rounded-xl grid place-items-center text-white font-extrabold" style="background:linear-gradient(135deg,#5d69ea,#f59f42);color:#fff">ن</div><div class="leading-4"><b>نان‌یار</b><div class="text-[11px] mu">سامانهٔ ملی آرد و نان</div></div></div>`+L;
- const a=$('#app');if(keep){const q=document.activeElement;a.innerHTML=V[UI.tab]();const n=a.querySelector('input');if(n){n.focus();n.setSelectionRange(99,99)}}else{a.className='p-4 pb-28 md:pb-8 max-w-5xl mx-auto space-y-4 v';a.innerHTML=V[UI.tab]()}}
-let TH='light';try{TH=localStorage.nanyar_th||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')}catch(e){}
-const ap=()=>document.documentElement.setAttribute('data-theme',TH);ap();
-function tth(){TH=TH=='dark'?'light':'dark';try{localStorage.nanyar_th=TH}catch(e){}ap();render()}
-function nt(){const L=[];if(S.role=='baker'){const b=me(),r=rk(b);S.ship.filter(x=>x.b==b.id&&x.st=='transit').forEach(p=>L.push(['محموله جدید',p.id+' منتظر تأیید دریافت است','#4f5bd5']));if((S.off[b.id]||[]).length)L.push(['صف آفلاین',F(S.off[b.id].length)+' تراکنش منتظر همگام‌سازی','#e0662c']);if(r.score>40)L.push(['وضعیت عملکرد',r.hum,r.lvl[1]])}else S.bk.map(b=>({b,r:rk(b)})).filter(x=>x.r.score>60).sort((a,c)=>c.r.score-a.r.score).slice(0,6).forEach(x=>L.push([x.b.name+' · ریسک '+F(x.r.score),x.r.act+' '+x.r.sg.slice(0,2).map(s=>s.l).join('، '),x.r.lvl[1]]));return L}
-V.notif=()=>'<div class="space-y-3">'+(nt().map(n=>`<div class="card p-4 flex gap-3"><i class="w-1.5 rounded-full" style="background:${n[2]}"></i><div><b>${n[0]}</b><div class="text-sm mu">${n[1]}</div></div></div>`).join('')||'<div class="card p-5 mu">اعلان جدیدی نیست.</div>')+'</div>';
-function rec(b){const w=S.days[b.id].slice(-7),e=sm(w,'bf'),a=sm(w,'used'),m=Math.max(e,a),dv=(a-e)/a*100,t=S.set.tol,s=Math.abs(dv)<=t?['طبیعی','#2e9f74']:Math.abs(dv)<=t*2.5?['نیازمند پایش','#d69e1f']:['بررسی لازم است','#d64550'];
-return`<div class="card p-5"><div class="flex justify-between mb-3"><b>تطبیق آرد با نان · ۷ روز</b>${tg(s[0],s[1])}</div>${[['آرد معادل نان فروخته‌شده',e,'#4f5bd5'],['آرد مصرف‌شده',a,s[1]]].map(x=>`<div class="mb-2"><div class="flex justify-between text-sm"><span>${x[0]}</span><b>${F(x[1])} کیلو</b></div>${bar(x[1]/m*100,x[2])}</div>`).join('')}<div class="text-xs mu">اختلاف ${F(dv)}٪ · تلورانس طبیعی ±${F(t)}٪ (ضایعات، دورریز، تفاوت وزن)</div></div>`}
-function c7(b){const d=S.days[b.id].slice(-7),m=Math.max(...d.map(x=>x.sold));return`<div class="card p-5"><b>فروش ۷ روز اخیر</b><svg viewBox="0 0 280 100" class="w-full mt-2">${d.map((x,i)=>`<rect x="${i*40+6}" y="${90-x.sold/m*80}" width="28" height="${x.sold/m*80}" rx="8" fill="${i==6?'#4f5bd5':'#aab1f0'}"/>`).join('')}</svg></div>`}
-function hrs(b){const h=Array(17).fill(0);S.tx.filter(x=>x.b==b.id&&x.st=='ok'&&x.t>Date.now()-3*DAY).forEach(x=>{const k=new Date(x.t).getHours()-6;if(k>=0&&k<17)h[k]+=x.q});const m=Math.max(...h,1);return`<div class="card p-4"><b>ساعت‌های اوج فروش</b><svg viewBox="0 0 340 90" class="w-full mt-2">${h.map((v,i)=>`<rect x="${i*20+2}" y="${80-v/m*70}" width="14" height="${v/m*70}" rx="5" fill="${v==m?'#f59f42':'#aab1f0'}"/>`).join('')}</svg><div class="text-xs mu">ساعت ۶ تا ۲۲ · برای برنامه‌ریزی تنور و نیروی کار</div></div>`}
-function heat(A){const B=[['کم‌ریسک',0,20,'#2e9f74'],['طبیعی',21,40,'#6dbf8f'],['پایش',41,60,'#d69e1f'],['بررسی',61,80,'#e0662c'],['پرریسک',81,101,'#d64550']],c=B.map(x=>A.filter(a=>a.r.score>=x[1]&&a.r.score<=x[2]).length);
-return`<div class="card p-4"><div class="font-bold mb-3">نقشهٔ حرارتی نانوایی‌ها</div><div class="flex h-3 rounded-full overflow-hidden mb-2">${B.map((x,i)=>`<div style="flex:${c[i]};background:${x[3]}"></div>`).join('')}</div><div class="flex flex-wrap gap-3 text-xs mu mb-3">${B.map((x,i)=>`<span><i class="inline-block w-2 h-2 rounded-full ml-1" style="background:${x[3]}"></i>${x[0]} ${F(c[i])}</span>`).join('')}</div><div class="grid grid-cols-5 md:grid-cols-10 gap-2">${A.map(a=>`<button title="${a.b.name}" onclick="go('file','${a.b.id}')" class="rounded-xl py-2 text-xs font-bold text-white" style="background:${a.r.lvl[1]}">${F(+a.b.id.slice(1))}</button>`).join('')}</div></div>`}
-function peer(b,r){const A=S.bk.map(x=>({x,r:rk(x)})).sort((p,q)=>p.r.score-q.r.score),i=A.findIndex(a=>a.x.id==b.id)+1,av=A.reduce((s,a)=>s+sm(S.days[a.x.id].slice(-7),'sold'),0)/A.length,m=sm(S.days[b.id].slice(-7),'sold'),as=A.reduce((s,a)=>s+a.r.score,0)/A.length;
-return`<div class="card p-4"><b>مقایسه با همتاها</b><div class="grid grid-cols-3 gap-3 mt-3 text-sm"><div><div class="text-xs mu">رتبه از ${F(A.length)} (۱ بهترین)</div><b class="text-lg">${F(i)}</b></div><div><div class="text-xs mu">فروش نسبت به میانگین</div><b class="text-lg">${F(m/av*100)}٪</b></div><div><div class="text-xs mu">امتیاز ریسک نسبت به میانگین</div><b class="text-lg">${F(r.score-as)}</b></div></div></div>`}
-const BRF={'مغایرت مصرف آرد':'موجودی فیزیکی آرد و کیسه‌های باز را با سامانه بسنجید','فروش بدون مصرف آرد':'مصرف آرد و ثبت‌های فروش را کنار هم ببینید','جهش غیرعادی فروش':'علت افزایش فروش (مناسبت یا سفارش عمده) را بپرسید','تراکنش‌های تکراری':'کارت‌خوان و گزارش تراکنش‌های تکراری را ببینید','تراکنش‌های پشت‌سرهم':'کارت‌خوان و دستگاه ثبت را بررسی کنید','تراکنش در ساعات غیرعادی':'ساعت کاری واقعی نانوایی را مشاهده کنید','هجوم بعد از آفلاین':'سابقهٔ قطعی اینترنت را بررسی کنید','فراتر از ظرفیت ساعتی':'ظرفیت تنور و تعداد شاگرد را ببینید','شکایت مشتریان (وزن‌دهی‌شده)':'ده نان را وزن‌کشی و با مشتریان صحبت کنید','وزن پایین‌تر از استاندارد':'چند نان را وزن‌کشی کنید','قیمت خارج از مصوب':'تابلوی قیمت را با نرخ مصوب مقایسه کنید'};
-function brief(r){return`<div class="card p-4"><b>راهنمای بازدید</b><div class="text-sm mt-2 space-y-1.5">${r.sg.map(s=>`<div>☐ ${BRF[s.l]||s.l}</div>`).join('')||'<div class="mu">بازدید ضروری نیست.</div>'}</div></div>`}
-function sub(A){S.pay=S.pay||{};return`<div class="card p-4 overflow-x-auto"><div class="font-bold mb-1">پرداخت یارانه (پیشنهاد سیستم)</div><div class="text-xs mu mb-2">درصد واریز فوری از سطح عملکرد می‌آید و باقی پس از بررسی آزاد می‌شود. جریمهٔ خودکار وجود ندارد و تصمیم با شماست.</div><table><tr><th>نانوایی</th><th>یارانهٔ هفته (م.ریال)</th><th>واریز پیشنهادی</th><th>در انتظار بررسی</th><th></th></tr>${[...A].sort((a,c)=>c.r.score-a.r.score).slice(0,10).map(a=>{const t=sm(S.days[a.b.id].slice(-7),'deliv')*RATE/1e6,p=a.r.score<=40?100:a.r.score<=60?80:a.r.score<=80?50:30;return`<tr><td>${a.b.name}</td><td>${F(t)}</td><td>${F(t*p/100)} (${F(p)}٪)</td><td>${F(t-t*p/100)}</td><td>${S.pay[a.b.id]?tg('تأیید شد','#2e9f74'):`<button class="tg" style="color:#4f5bd5" onclick="pay('${a.b.id}',${p})">تأیید پرداخت</button>`}</td></tr>`}).join('')}</table></div>`}
-function pay(id,p){S.pay[id]=Date.now();aud('مدیر','تأیید پرداخت '+p+'٪',id,'-',p+'٪');save();toast('تأیید ثبت شد');render()}
+:root{--bg:#f4f6f9;--card:#fff;--tx:#0f172a;--mu:#64748b;--bd:#e2e8f0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0b1220;--card:#131c2e;--tx:#e5e9f0;--mu:#94a3b8;--bd:#24304a}}
+:root[data-theme=dark]{--bg:#0b1220;--card:#131c2e;--tx:#e5e9f0;--mu:#94a3b8;--bd:#24304a}
+body{background:var(--bg);color:var(--tx);font-family:Tahoma,Vazirmatn,sans-serif}
+.c{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px}
+.mu{color:var(--mu)}.b{border:1px solid var(--bd);border-radius:8px;padding:6px 10px;background:var(--card);color:var(--tx);font-size:13px}
+.btn{background:#0f766e;color:#fff;border-radius:8px;padding:7px 12px;font-size:13px}.btn:hover{opacity:.9}
+.btn.r{background:#b91c1c}.btn.o{background:#c2410c}.btn.g{background:#475569}
+table{width:100%;font-size:13px}th{text-align:right;color:var(--mu);font-weight:500;padding:6px}td{padding:6px;border-top:1px solid var(--bd)}
+.tab{padding:8px 12px;border-radius:8px;font-size:13px;white-space:nowrap}.tab.on{background:#0f766e;color:#fff}
+.sc{overflow-x:auto}
 
-render();
+*,*::before,*::after{box-sizing:border-box}body{margin:0;line-height:1.6;font-size:14px}
+button,input,select{font-family:inherit;cursor:pointer}input{cursor:text}
+.max-w-6xl{max-width:1150px}.mx-auto{margin-inline:auto}.p-3{padding:12px}.p-3.rounded-lg{padding:12px}
+.flex{display:flex}.flex-wrap{flex-wrap:wrap}.flex-1{flex:1}.items-center{align-items:center}.justify-between{justify-content:space-between}
+.gap-1{gap:4px}.gap-2{gap:8px}.grid{display:grid}.grid-cols-2{grid-template-columns:repeat(2,1fr)}
+.g3,.g4{}@media(min-width:768px){.g4{grid-template-columns:repeat(4,1fr)}.g3{grid-template-columns:repeat(3,1fr)}}
+.space-y-2>*+*{margin-top:8px}.mb-1{margin-bottom:4px}.mb-2{margin-bottom:8px}.mb-3{margin-bottom:12px}.mt-1{margin-top:4px}.mt-2{margin-top:8px}.mt-3{margin-top:12px}.my-2{margin-block:8px}.mr-1{margin-right:4px}.pr-3{padding-right:12px}
+.text-xs{font-size:12px}.text-sm{font-size:13px}.text-lg{font-size:18px}.text-2xl{font-size:26px}.font-bold,b{font-weight:700}.text-right{text-align:right}
+.cursor-pointer{cursor:pointer}.hidden{display:none}.w-24{width:96px}.mw2{min-width:200px}.border-r-2{border-right:2px solid}.rounded-lg{border-radius:10px}
+.fixed{position:fixed}.bottom-4{bottom:16px}.left-4{left:16px}.right-4{right:16px}@media(min-width:768px){.tw{right:auto;width:380px}}
+header{background:linear-gradient(135deg,#0f766e,#115e59);color:#fff;padding:16px 18px;border-radius:14px}
+header .mu{color:#ccfbf1}header .b{background:#ffffff22;color:#fff;border-color:#ffffff44}
+.c{box-shadow:0 1px 3px #0000000d}.c:hover{box-shadow:0 2px 8px #0000001a}
+tr:hover td{background:#0f766e10}th{font-size:12px;background:#0f766e0d}
+.tab{background:var(--card);border:1px solid var(--bd);color:var(--tx)}.tab.on{border-color:#0f766e}
+.btn{border:0}select.b,input.b{outline:none}input.b:focus,select.b:focus{border-color:#0f766e}
+
+*{box-sizing:border-box}body{margin:0;line-height:1.6}button,input,select{font-family:inherit;cursor:pointer}input{cursor:text}
+.max-w-6xl{max-width:1150px}.mx-auto{margin-inline:auto}.p-3{padding:12px}.flex{display:flex}.flex-wrap{flex-wrap:wrap}.flex-1{flex:1}.items-center{align-items:center}.justify-between{justify-content:space-between}
+.gap-1{gap:4px}.gap-2{gap:8px}.mb-1{margin-bottom:4px}.mb-2{margin-bottom:8px}.mb-3{margin-bottom:12px}.mt-1{margin-top:4px}.mt-2{margin-top:8px}.mt-3{margin-top:12px}.my-2{margin-block:8px}
+.text-xs{font-size:12px}.text-sm{font-size:13.5px}.text-lg{font-size:19px}.text-2xl{font-size:26px}.font-bold{font-weight:700}.text-right{text-align:right}
+.grid{display:grid}.grid-cols-2{grid-template-columns:repeat(2,1fr)}.space-y-2>*+*{margin-top:8px}.hidden{display:none}.cursor-pointer{cursor:pointer}.w-24{width:96px}
+.rounded-lg{border-radius:10px}.p-3{padding:12px}.pr-3{padding-right:12px}.mr-1{margin-right:4px}.border-r-2{border-right:2px solid}.min-w-\[200px\]{min-width:200px}
+.fixed{position:fixed}.bottom-4{bottom:16px}.left-4{left:16px}.right-4{right:16px}
+@media(min-width:768px){.md\:grid-cols-4{grid-template-columns:repeat(4,1fr)}.md\:grid-cols-3{grid-template-columns:repeat(3,1fr)}.md\:left-auto{left:auto}.md\:w-96{width:384px}}
+header{background:linear-gradient(135deg,#0f766e,#115e59);color:#fff;padding:16px 18px;border-radius:14px}header .mu{color:#ccfbf1}header .b{background:#ffffff22;color:#fff;border-color:#ffffff44}
+nav{background:var(--card);border:1px solid var(--bd);padding:6px;border-radius:12px}.tab{background:transparent;border:0;color:var(--tx)}.tab:hover{background:var(--bg)}
+.c{box-shadow:0 1px 3px #0000000f}.btn{border:0;font-weight:600}tr:hover td{background:var(--bg)}
+:root[data-theme=dark]{--bg:#0a121c;--card:rgba(255,255,255,.045);--sol:#101c29;--s2:rgba(255,255,255,.07);--bd:rgba(255,255,255,.09);--tx:#e9eff6;--mu:#9fb0c2;--pri:#2f96b3;--pri2:#49b3cf;--gold:#d9b556;--gold2:#e8c877;--sb:linear-gradient(180deg,#0b1b26,#081319 60%,#060e13);--bgg:radial-gradient(1100px 600px at 100% -10%,#123044 0%,transparent 55%),radial-gradient(900px 500px at -10% 110%,#10241d 0%,transparent 55%),#0a121c}
+:root[data-theme=light]{--bg:#eef1f6;--card:rgba(255,255,255,.75);--sol:#fff;--s2:rgba(15,23,42,.05);--bd:rgba(15,23,42,.1);--tx:#0f1b2a;--mu:#5b6b7f;--pri:#0f5c73;--pri2:#12849f;--gold:#a97e1f;--gold2:#c99a3a;--sb:linear-gradient(180deg,#0f2a38,#0c2230 60%,#0a1c28);--bgg:radial-gradient(1200px 600px at 100% -10%,#dfe9f7 0%,transparent 60%),radial-gradient(900px 500px at -10% 110%,#e7f1ea 0%,transparent 55%),#eef1f6}
+body{font-family:'Vazirmatn',Tahoma,sans-serif;background:var(--bgg);color:var(--tx);min-height:100vh;-webkit-font-smoothing:antialiased}
+.app{display:flex;min-height:100vh}
+.sidebar{width:250px;flex:none;background:var(--sb);color:#b9cbd6;position:sticky;top:0;height:100vh;overflow-y:auto;padding:20px 14px;display:flex;flex-direction:column;gap:4px;z-index:40}
+.brand{display:flex;align-items:center;gap:12px;padding:4px 8px 18px;border-bottom:1px solid #ffffff14;margin-bottom:12px}
+.mark{width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,var(--gold2),var(--gold) 60%,#8a6612);display:flex;align-items:center;justify-content:center;font-size:21px;box-shadow:0 6px 18px #0006}
+.brand b{display:block;color:#fff;font-weight:800;font-size:15px}.brand span{font-size:11px;color:#8fa7b4}
+.gl{font-size:10.5px;color:#6f8794;font-weight:700;padding:12px 10px 4px}
+.ni{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:12px;border:1px solid transparent;background:none;color:#b9cbd6;font-size:13.3px;text-align:right;width:100%;transition:.2s}
+.ni svg{width:18px;height:18px;flex:none;opacity:.85}.ni:hover{background:#ffffff0f;color:#fff}
+.ni.on{background:linear-gradient(90deg,#d9b55629,#d9b55608);border-color:#d9b5564d;color:#fff}.ni.on svg{stroke:var(--gold2);opacity:1}
+.ni i{margin-inline-start:auto;background:#e2685a;color:#fff;font-style:normal;font-size:10px;font-weight:700;padding:1px 7px;border-radius:20px}
+.main{flex:1;min-width:0}
+.top{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:12px;padding:13px 24px;background:var(--card);backdrop-filter:blur(18px) saturate(160%);border-bottom:1px solid var(--bd)}
+.top h2{font-size:16px;font-weight:800}.top .sp{margin-inline-start:auto;display:flex;gap:8px;align-items:center}
+.ib{width:38px;height:38px;border-radius:11px;border:1px solid var(--bd);background:var(--sol);color:var(--tx);display:flex;align-items:center;justify-content:center}
+.ham{display:none}
+.content{padding:22px 24px 60px;max-width:1400px;margin:0 auto}
+.ph{margin-bottom:18px}.ph h1{font-size:22px;font-weight:800}.ph p{font-size:13px;color:var(--mu);margin-top:3px}
+.c{background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:18px;backdrop-filter:blur(16px) saturate(140%);box-shadow:0 2px 10px #0003;transition:.25s}
+.stat{display:flex;flex-direction:column;gap:8px}.stat .ico{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:19px}
+.stat .v{font-size:27px;font-weight:800}.stat .l{font-size:12.5px;color:var(--mu);font-weight:600}
+.b{border:1px solid var(--bd);border-radius:12px;padding:8px 12px;background:var(--sol);color:var(--tx);font-size:13px;font-family:inherit}
+.btn{background:linear-gradient(135deg,var(--pri2),var(--pri));color:#fff;border-radius:12px;padding:9px 15px;font-size:13px;font-weight:700;border:0;transition:.2s}.btn:hover{transform:translateY(-1px);box-shadow:0 6px 16px #0004;opacity:1}
+.btn.r{background:linear-gradient(135deg,#e2685a,#b33327)}.btn.o{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#221a04}.btn.g{background:var(--sol);color:var(--tx);border:1px solid var(--bd)}
+.mu{color:var(--mu)}.sc{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}th{text-align:right;background:var(--s2);color:var(--mu);font-weight:700;font-size:11.5px;padding:11px 12px;white-space:nowrap}td{padding:11px 12px;border-top:1px solid var(--bd)}tr:hover td{background:var(--s2)}
+@media(max-width:980px){.sidebar{position:fixed;right:0;transform:translateX(100%);transition:.3s}.sidebar.open{transform:none}.ham{display:flex}.content{padding:16px 12px}}
+</style></head>
+<body>
+<div class="app">
+<aside class="sidebar" id="sb"><div class="brand"><div class="mark">🌾</div><div><b>آردیار</b><span>سامانه ملی رهگیری آرد و نان</span></div></div><div id="nav"></div></aside>
+<div class="main"><header class="top"><button class="ib ham" onclick="document.getElementById('sb').classList.toggle('open')">☰</button><h2 id="pt"></h2>
+<div class="sp"><span id="net" class="b"></span><button class="ib" onclick="T()" title="تیره/روشن">◐</button></div></header>
+<main class="content"><div class="ph"><h1 id="h1"></h1><p id="hp"></p></div><div id="v"></div></main></div></div>
+<div id="toast" class="fixed bottom-4 left-4 right-4 md:left-auto md:w-96 space-y-2" style="z-index:200"></div>
+<script>
+const $=s=>document.querySelector(s),KEY='ardyar_v1';
+const fa=n=>Number(n).toLocaleString('fa-IR'),
+ jd=t=>new Date(t).toLocaleString('fa-IR-u-ca-persian',{dateStyle:'short',timeStyle:'short'});
+const TR={CREATED:'ALLOCATED',ALLOCATED:'IN_TRANSIT',IN_TRANSIT:'DELIVERED',DELIVERED:'RECEIVED',RECEIVED:'OPENED',OPENED:'CONSUMED'};
+const FA={CREATED:'تولید',ALLOCATED:'تخصیص',IN_TRANSIT:'در حمل',DELIVERED:'تحویل',RECEIVED:'دریافت',OPENED:'باز شده',CONSUMED:'مصرف شده',BLOCKED:'مسدود',CANCELLED:'لغو'};
+const SC={A:'عالی',B:'مغایرت جزئی',C:'تراکنش غیرعادی',D:'QR تکراری',E:'آفلاین مشکوک',F:'مغایرت موجودی',G:'شکایت‌های متعدد',H:'پرریسک'};
+const W={FLOUR:22,SALES:18,QR:20,OFFLINE:15,STOCK:12,COMPLAINT:8,INSPECT:14};
+let S;
+function seed(){
+ const rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+ S={seq:100,t:0,rules:{flourWarn:15,flourCrit:30,spike:2.0,burst:100,ratio:0.11},
+ bakeries:'ABCDEFGH'.split('').map((k,i)=>({id:`BAK-1405-${String(125+i).padStart(6,'0')}`,key:k,name:`نانوایی ${SC[k]}`,city:['کاشمر','مشهد','تبریز','اهواز'][i%4],cap:900,base:500,consumedKg:0,sold:0,stock:0,status:'ACTIVE',pend:0})),
+ bags:[],sales:[],alerts:[],audit:[],complaints:[],inspections:[],violations:[]};
+ const fac='FAC-1405-000014';
+ for(let i=0;i<48;i++){const b=S.bakeries[i%8];S.bags.push({id:`BAG-1405-${String(18300+i).padStart(11,'0')}`,batch:'BAT-1405-000987',factory:fac,dest:b.id,kg:40,status:'CREATED',tl:[ev('تولید و صدور QR','کارخانه آرد',fac)]})}
+ // seed history
+ S.bags.forEach((g,i)=>{const n=i<24?rnd(4,6):0;let k=0;while(k<n&&TR[g.status]&&k<6){g.status=TR[g.status];g.tl.push(ev(FA[g.status],'مسیر',g.dest));k++;
+ if(g.status==='RECEIVED')bk(g.dest).stock+=40;if(g.status==='CONSUMED'){bk(g.dest).stock-=40;bk(g.dest).consumedKg+=40}if(g.status==='OPENED'){}}});
+ S.bakeries.forEach(b=>{b.sold=Math.round(b.consumedKg/0.11*(b.key==='B'?0.8:1)*(b.key==='F'?1:1));});
+ bk(S.bakeries[0].id);S.bakeries[0].sold=Math.round(S.bakeries[0].consumedKg/0.11);
+ S.bakeries.forEach(b=>{b.stock=Math.max(b.stock,0)});
+ log('سیستم','SYSTEM','Seed','داده اولیه ایجاد شد');
+ // scenario seeds
+ alert_('D','QR',S.bakeries[3].id,'QR تکراری شناسایی شد','کیسه دوبار در دو ساعت اسکن شد',2);
+ alert_('C','SALES',S.bakeries[2].id,'جهش فروش','فروش ۲.۷ برابر میانگین',2);
+ alert_('E','OFFLINE',S.bakeries[4].id,'انباشت تراکنش آفلاین','۲۵۰ تراکنش در ۳۰ ثانیه',1);
+ alert_('F','STOCK',S.bakeries[5].id,'مغایرت موجودی','سیستمی ۱۲۰kg، ثبت‌شده ۲۰kg',2);
+ for(let i=0;i<4;i++)S.complaints.push({id:'CMP-1405-'+(145+i),bakery:S.bakeries[6].id,cat:'وزن کم',t:Date.now()-i*864e5,status:'OPEN'});
+ alert_('G','COMPLAINT',S.bakeries[6].id,'خوشه شکایت','۴ شکایت وزن کم در ۴ روز',1);
+ alert_('H','FLOUR',S.bakeries[7].id,'مغایرت آرد به نان','۳۴٪ بیش از آستانه بحرانی',3);
+ alert_('H','STOCK',S.bakeries[7].id,'مغایرت موجودی','',2);save()}
+function bk(id){return S.bakeries.find(b=>b.id===id)}
+function ev(op,place,user){return{t:Date.now()+(S?++S.t:0),op,place,user}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function load(){try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){}if(!S)seed()}
+function id(p){return `${p}-1405-${String(++S.seq).padStart(6,'0')}`}
+function log(user,role,action,entity,old,nw,res='OK'){S.audit.unshift({t:Date.now(),user,role,action,entity,old:old||'',nw:nw||'',res})}
+function alert_(k,type,bakery,title,why,sev){S.alerts.unshift({id:id('ALR'),type,bakery,title,why,sev,status:'OPEN',t:Date.now()});log('موتور','SYSTEM','Alert:'+type,bakery,'',title)}
+function toast(m,k='ok'){const d=document.createElement('div');d.className='c';d.style.borderColor=k==='ok'?'#16a34a':k==='w'?'#d97706':'#dc2626';d.textContent=(k==='ok'?'✓ ':k==='w'?'⚠ ':'✕ ')+m;$('#toast').appendChild(d);setTimeout(()=>d.remove(),3500)}
+// ---- engines
+function flourMismatch(b){if(!b.consumedKg)return 0;const exp=b.sold*S.rules.ratio;return Math.round(Math.abs(b.consumedKg-exp)/b.consumedKg*100)}
+function risk(b){const o=S.alerts.filter(a=>a.bakery===b.id&&a.status==='OPEN'),rs=[];
+ const add=(l,v)=>{if(v>0)rs.push([l,Math.min(v,40)])};
+ const cnt=t=>o.filter(a=>a.type===t).reduce((s,a)=>s+a.sev,0);
+ const m=flourMismatch(b);if(m>S.rules.flourCrit)add('مغایرت مصرف آرد ('+fa(m)+'٪)',W.FLOUR+8);else if(m>S.rules.flourWarn)add('مغایرت مصرف آرد ('+fa(m)+'٪)',W.FLOUR-6);
+ add('تراکنش غیرعادی',cnt('SALES')*9);add('ناهنجاری QR',cnt('QR')*10);add('آفلاین غیرعادی',cnt('OFFLINE')*8);add('اختلاف موجودی',cnt('STOCK')*6);add('شکایت',cnt('COMPLAINT')*5);
+ add('تخلف تأییدشده',S.violations.filter(v=>v.bakery===b.id&&v.status==='CONFIRMED').length*W.INSPECT);
+ const sc=Math.min(100,rs.reduce((s,r)=>s+r[1],0));return{sc,rs}}
+function trust(b){const r=risk(b).sc;return r<10?'HIGH_TRUST':r<25?'TRUSTED':r<45?'STANDARD':r<70?'UNDER_REVIEW':'HIGH_RISK'}
+function perf(b){return Math.max(0,100-risk(b).sc)}
+const TF={HIGH_TRUST:'اعتماد بالا',TRUSTED:'مورد اعتماد',STANDARD:'استاندارد',UNDER_REVIEW:'تحت بررسی',HIGH_RISK:'پرریسک'};
+const rc=s=>s>=70?'#dc2626':s>=45?'#ea580c':s>=25?'#d97706':'#16a34a';
+// ---- chain operations (state-validated)
+function op(bagId,bId,action){const g=S.bags.find(x=>x.id===bagId.trim()),b=bk(bId);
+ if(!g){alert_('?','QR',bId,'QR جعلی/ناشناخته',bagId,3);log(b.name,'BAKERY_MANAGER','SCAN',bagId,'','شناسه نامعتبر','REJECT');save();toast('شناسه معتبر نیست','e');return false}
+ if(g.status==='BLOCKED'||g.status==='CANCELLED'){log(b.name,'BAKERY_MANAGER',action,g.id,g.status,'','REJECT');toast('کیسه '+FA[g.status]+' است؛ عملیات مجاز نیست','e');save();return false}
+ if(action!=='dispatch'&&g.dest!==bId){alert_('X','QR',bId,'کیسه نانوایی دیگر',g.id+' → '+bk(g.dest).name,3);log(b.name,'BAKERY_MANAGER',action,g.id,'','مقصد اشتباه','REJECT');save();toast('این کیسه برای این نانوایی تخصیص داده نشده است','e');return false}
+ const nx=TR[g.status];
+ if(!nx){alert_('D','QR',bId,'QR تکراری — تلاش روی کیسه تمام‌شده',g.id,3);log(b.name,'BAKERY_MANAGER',action,g.id,g.status,'','REJECT');save();toast('کیسه قبلاً مصرف شده؛ هشدار بحرانی','e');return false}
+ const want={receive:'RECEIVED',open:'OPENED',consume:'CONSUMED'}[action];
+ if(want&&nx!==want){log(b.name,'BAKERY_MANAGER',action,g.id,g.status,want,'REJECT');toast(`گذار ${FA[g.status]} ← ${FA[want]} مجاز نیست (مرحله بعد: ${FA[nx]})`,'e');save();return false}
+ g.tl.push(ev(FA[nx],'نانوایی',b.name));
+ if(nx==='RECEIVED')b.stock+=g.kg;if(nx==='CONSUMED'){b.stock-=g.kg;b.consumedKg+=g.kg;if(b.stock<0){b.stock=0;alert_('F','STOCK',bId,'موجودی منفی',g.id,3)}}
+ log(b.name,'BAKERY_MANAGER',action,g.id,g.status,nx);g.status=nx;save();toast(g.id+' ← '+FA[nx]);return true}
+function advance(g,steps){while(steps--&&TR[g.status]&&g.status!=='DELIVERED'){g.status=TR[g.status];g.tl.push(ev(FA[g.status],'مسیر','سیستم'));}}
+function sale(bId,q,offline){const b=bk(bId);S.sales.push({id:id('TXN'),bakery:bId,q,t:Date.now(),off:!!offline});b.sold+=q;
+ if(q>b.base*S.rules.spike){alert_('C','SALES',bId,'جهش غیرعادی فروش',`میانگین ${fa(b.base)}، امروز ${fa(q)}`,2)}
+ if(offline&&q>0&&S.rules.burst&&offline>S.rules.burst)alert_('E','OFFLINE',bId,'انباشت تراکنش آفلاین',`${fa(offline)} تراکنش در ۳۰ ثانیه`,2);
+ if(b.stock<=0&&q>200)alert_('F','STOCK',bId,'فروش بالا با موجودی ناکافی','',2);
+ const m=flourMismatch(b);if(m>S.rules.flourWarn&&!S.alerts.some(a=>a.type==='FLOUR'&&a.bakery===bId&&a.status==='OPEN'))alert_('F','FLOUR',bId,'مغایرت آرد به نان',fa(m)+'٪ — '+(m>S.rules.flourCrit?'بحرانی':'نیازمند بررسی'),m>S.rules.flourCrit?3:2);
+ log(b.name,'BAKERY_MANAGER','SALE',bId,'',fa(q)+' نان');save()}
+function inspect(bId,result){const b=bk(bId),i={id:id('INS'),bakery:bId,result,t:Date.now()};S.inspections.push(i);
+ S.alerts.filter(a=>a.bakery===bId&&a.status==='OPEN').forEach(a=>a.status=result==='VIOLATION'?'UNDER_INSPECTION':'DISMISSED');
+ if(result==='VIOLATION')S.violations.push({id:id('VIO'),bakery:bId,ins:i.id,status:'PENDING',t:Date.now()});
+ log('بازرس','INSPECTOR','INSPECT',bId,'',result);save();toast('بازرسی ثبت شد: '+result,result==='CLEAR'?'ok':'w')}
+// ---- views
+const PAGES={dash,scan,bak,alerts,sim,rules,audit,data};
+const NAMES={dash:'داشبورد ملی',scan:'اسکن و رهگیری',bak:'نانوایی‌ها',alerts:'هشدارها',sim:'مرکز شبیه‌سازی',rules:'قوانین',audit:'Audit Log',data:'پشتیبان'};
+let page='dash',sel=null,actAs=null,detail=null;
+function go(p){page=p;detail=null;draw()}
+function badge(t,c){return `<span style="background:${c}22;color:${c};padding:2px 8px;border-radius:99px;font-size:12px">${t}</span>`}
+function dash(){const bs=S.bakeries,op=S.alerts.filter(a=>a.status==='OPEN'),c=n=>op.filter(a=>a.sev===n).length;
+ const st=k=>S.bags.filter(g=>g.status===k).length;
+ const card=(l,v,col)=>{const c=col||(l.startsWith('🔴')?'#e2685a':l.startsWith('🟠')?'#e0a53d':l.startsWith('🟡')?'#d9b556':'#2f96b3');return `<div class="c stat"><div class="ico" style="background:${c}22;color:${c}">●</div><div class="v">${v}</div><div class="l">${l.replace(/^[🔴🟠🟡]\s*/u,'')}</div></div>`};
+ return `<div class="grid grid-cols-2 g4 gap-2 mb-3">${card('🔴 بحرانی',fa(c(3)),'#dc2626')}${card('🟠 نیازمند بررسی',fa(c(2)),'#ea580c')}${card('🟡 هشدار',fa(c(1)),'#d97706')}${card('کل کیسه‌ها',fa(S.bags.length))}
+ ${card('در حمل/تحویل‌نشده',fa(st('CREATED')+st('ALLOCATED')+st('IN_TRANSIT')+st('DELIVERED')))}${card('آرد مصرف‌شده (kg)',fa(bs.reduce((s,b)=>s+b.consumedKg,0)))}${card('نان فروخته‌شده',fa(bs.reduce((s,b)=>s+b.sold,0)))}${card('پرریسک',fa(bs.filter(b=>risk(b).sc>=45).length))}</div>
+ <div class="c mb-3"><div class="font-bold mb-2">نقشه حرارتی ریسک نانوایی‌ها</div><div class="grid grid-cols-2 g4 gap-2">${bs.map(b=>`<button onclick="detail='${b.id}';go2('bak')" class="p-3 rounded-lg text-right" style="background:${rc(risk(b).sc)}22;border:1px solid ${rc(risk(b).sc)}"><div class="text-sm font-bold">${b.name}</div><div class="text-xs mu">${b.city} · ریسک ${fa(risk(b).sc)}</div></button>`).join('')}</div></div>
+ <div class="c"><div class="font-bold mb-2">صف بازرسی مبتنی بر ریسک</div><div class="sc"><table><tr><th>اولویت</th><th>نانوایی</th><th>ریسک</th><th>دلیل اصلی</th><th>اقدام پیشنهادی</th></tr>
+ ${[...bs].sort((a,b)=>risk(b).sc-risk(a).sc).slice(0,5).map((b,i)=>{const r=risk(b);return `<tr><td>${fa(i+1)}</td><td>${b.name}</td><td>${badge(fa(r.sc),rc(r.sc))}</td><td>${r.rs[0]?r.rs[0][0]:'—'}</td><td>${r.sc>=60?'بازرسی هدفمند':r.sc>=25?'بررسی':'پایش'}</td></tr>`}).join('')}</table></div></div>`}
+function go2(p){page=p;draw()}
+function scan(){const b=bk(actAs||S.bakeries[0].id);actAs=b.id;const g=S.bags.find(x=>x.id===sel);
+ return `<div class="c mb-3"><div class="font-bold mb-2">اسکن QR / ورود شناسه</div><div class="flex flex-wrap gap-2 mb-2">
+ <select class="b" onchange="actAs=this.value;draw()">${S.bakeries.map(x=>`<option value="${x.id}" ${x.id===b.id?'selected':''}>${x.name}</option>`).join('')}</select>
+ <input id="bi" class="b flex-1 mw2" dir="ltr" placeholder="BAG-1405-..." value="${sel||''}" list="bl"><datalist id="bl">${S.bags.slice(0,60).map(x=>`<option value="${x.id}">`).join('')}</datalist>
+ <button class="btn g" onclick="sel=$('#bi').value.trim();draw()">رهگیری</button></div>
+ <div class="flex flex-wrap gap-2"><button class="btn" onclick="A('receive')">تأیید دریافت</button><button class="btn" onclick="A('open')">باز کردن</button><button class="btn o" onclick="A('consume')">ثبت مصرف</button></div>
+ <div class="text-xs mu mt-2">موجودی سیستمی ${b.name}: ${fa(b.stock)} kg · مغایرت آرد به نان: ${fa(flourMismatch(b))}٪</div></div>
+ ${sel&&!g?`<div class="c" style="border-color:#dc2626">⛔ شناسه معتبر نیست</div>`:''}
+ ${g?`<div class="c"><div class="font-bold">شناسنامه دیجیتال کیسه</div><div class="grid grid-cols-2 g3 gap-2 text-sm my-2"><div class="mu">شناسه: <b dir="ltr">${g.id}</b></div><div class="mu">محموله: ${g.batch}</div><div class="mu">کارخانه: ${g.factory}</div><div class="mu">مقصد: ${bk(g.dest).name}</div><div class="mu">وزن: ${fa(g.kg)} kg</div><div>${badge(FA[g.status],'#0f766e')}</div></div>
+ <div class="font-bold mb-1">Timeline</div>${g.tl.map(e=>`<div class="text-sm border-r-2 pr-3 mr-1 mb-1" style="border-color:#0f766e">✓ <b>${e.op}</b> <span class="mu">— ${e.user} · ${jd(e.t)}</span></div>`).join('')}
+ ${TR[g.status]?`<div class="text-sm mu">● مرحله بعد: ${FA[TR[g.status]]}</div>`:'<div class="text-sm mu">○ پایان چرخه</div>'}</div>`:''}`}
+function A(a){const v=$('#bi').value;sel=v.trim();op(v,actAs,a);draw()}
+function bak(){if(detail){const b=bk(detail),r=risk(b);return `<button class="btn g mb-2" onclick="detail=null;draw()">← بازگشت</button>
+ <div class="c mb-3"><div class="text-lg font-bold">${b.name} <span class="text-xs mu" dir="ltr">${b.id}</span></div>
+ <div class="grid grid-cols-2 g4 gap-2 my-2 text-sm"><div>ریسک: <b style="color:${rc(r.sc)}">${fa(r.sc)}</b></div><div>عملکرد: <b>${fa(perf(b))}</b></div><div>اعتماد: <b>${TF[trust(b)]}</b></div><div>تطابق آرد-نان: <b>${fa(100-Math.min(100,flourMismatch(b)))}٪</b></div></div>
+ <div class="font-bold text-sm">چرا این ریسک؟</div>${r.rs.map(x=>`<div class="text-sm">+${fa(x[1])} ${x[0]}</div>`).join('')||'<div class="text-sm mu">دلیل ریسکی ثبت نشده است.</div>'}
+ <div class="flex flex-wrap gap-2 mt-3"><button class="btn" onclick="inspect('${b.id}','CLEAR');draw()">بازرسی: بدون تخلف</button><button class="btn r" onclick="inspect('${b.id}','VIOLATION');draw()">بازرسی: تخلف</button></div></div>
+ <div class="c"><div class="font-bold mb-1">پرونده‌ها</div><div class="text-sm mu">هشدارهای باز: ${fa(S.alerts.filter(a=>a.bakery===b.id&&a.status==='OPEN').length)} · شکایت: ${fa(S.complaints.filter(x=>x.bakery===b.id).length)} · بازرسی: ${fa(S.inspections.filter(x=>x.bakery===b.id).length)}</div>
+ ${S.violations.filter(v=>v.bakery===b.id).map(v=>`<div class="text-sm mt-1">${v.id} ${badge(v.status,'#ea580c')} ${v.status==='PENDING'?`<button class="btn r" onclick="vio('${v.id}','CONFIRMED')">تأیید تخلف</button> <button class="btn g" onclick="vio('${v.id}','DISMISSED')">رد</button>`:''}</div>`).join('')}</div>`}
+ return `<div class="c sc"><table><tr><th>نانوایی</th><th>شهر</th><th>موجودی kg</th><th>ریسک</th><th>اعتماد</th><th>مغایرت آرد</th></tr>${S.bakeries.map(b=>`<tr class="cursor-pointer" onclick="detail='${b.id}';draw()"><td>${b.name}</td><td>${b.city}</td><td>${fa(b.stock)}</td><td>${badge(fa(risk(b).sc),rc(risk(b).sc))}</td><td>${TF[trust(b)]}</td><td>${fa(flourMismatch(b))}٪</td></tr>`).join('')}</table></div>`}
+function vio(i,s){const v=S.violations.find(x=>x.id===i);if(!confirm('آیا از ثبت این عملیات اطمینان دارید؟'))return;log('بازرس','INSPECTOR','VIOLATION',i,v.status,s);v.status=s;save();toast('وضعیت تخلف: '+s,'w');draw()}
+function alerts(){const l=S.alerts;return `<div class="space-y-2">${l.length?l.map(a=>`<div class="c" style="border-right:4px solid ${['','#d97706','#ea580c','#dc2626'][a.sev]}"><div class="flex justify-between"><b>${a.title}</b>${badge(a.status,'#64748b')}</div><div class="text-sm mu">${bk(a.bakery)?bk(a.bakery).name:a.bakery} · ${a.type} · ${jd(a.t)}</div>${a.why?`<div class="text-sm">شواهد: ${a.why}</div>`:''}<div class="text-xs mu">اقدام پیشنهادی: ${a.sev>=3?'مسدودسازی موقت (نیازمند تأیید انسانی)':a.sev==2?'بازرسی هدفمند':'پایش'}</div>${a.status==='OPEN'?`<button class="btn g mt-1" onclick="dis('${a.id}')">رد هشدار</button>`:''}</div>`).join(''):'<div class="c mu">هیچ هشداری ثبت نشده است.</div>'}</div>`}
+function dis(i){const a=S.alerts.find(x=>x.id===i);a.status='DISMISSED';log('مدیر','NATIONAL_MANAGER','DISMISS',i,'OPEN','DISMISSED');save();draw()}
+function sim(){const b0=S.bakeries[0].id,rb=()=>S.bakeries[Math.floor(Math.random()*8)];
+ const B=(t,f,c='')=>`<button class="btn ${c}" onclick="${f}">${t}</button>`;
+ return `<div class="c"><div class="font-bold mb-2">مرکز شبیه‌سازی</div><div class="flex flex-wrap gap-2">
+ ${B('▶ اجرای سناریوی کامل زنجیره','full()')}${B('ایجاد کیسه','mk()','g')}${B('ثبت فروش عادی','sale(rb().id,300);draw()','g')}${B('جهش فروش','sale(rb().id,1300);draw()','o')}${B('انباشت آفلاین (۲۵۰ تراکنش)','sale(rb().id,250,250);draw()','o')}${B('QR نانوایی دیگر','wrong()','r')}${B('QR تکراری','dupe()','r')}${B('QR ناشناخته','op(\'BAG-FAKE-1\',S.bakeries[0].id,\'receive\');draw()','r')}${B('ثبت شکایت','cmp()','g')}${B('بازنشانی داده‌ها','if(confirm(\'همه داده‌ها بازنشانی شود؟\')){seed();draw()}','g')}</div>
+ <div class="text-xs mu mt-2">هر دکمه روی داده واقعی ذخیره‌شده اثر می‌گذارد؛ داشبورد و ریسک فوراً به‌روز می‌شوند.</div></div>`}
+function mk(){const b=rb2();const g={id:id('BAG'),batch:'BAT-1405-000987',factory:'FAC-1405-000014',dest:b.id,kg:40,status:'CREATED',tl:[ev('تولید و صدور QR','کارخانه','FAC-1405-000014')]};S.bags.unshift(g);log('کارخانه','FACTORY_MANAGER','CREATE_BAG',g.id);save();sel=g.id;toast('کیسه '+g.id+' ایجاد شد');draw()}
+function rb2(){return S.bakeries[Math.floor(Math.random()*8)]}
+function full(){const b=S.bakeries[0],g={id:id('BAG'),batch:'BAT-1405-000987',factory:'FAC-1405-000014',dest:b.id,kg:40,status:'CREATED',tl:[ev('تولید و صدور QR','کارخانه','FAC-1405-000014')]};S.bags.unshift(g);
+ ['ALLOCATED','IN_TRANSIT','DELIVERED'].forEach(s=>{g.status=s;g.tl.push(ev(FA[s],'مسیر','سیستم'))});
+ op(g.id,b.id,'receive');op(g.id,b.id,'open');op(g.id,b.id,'consume');sale(b.id,364);
+ op(g.id,b.id,'consume');inspect(b.id,'CLEAR');sel=g.id;actAs=b.id;toast('زنجیره کامل اجرا شد');go('scan')}
+function wrong(){const g=S.bags.find(x=>x.status==='DELIVERED'||x.status==='IN_TRANSIT')||S.bags[0];const o=S.bakeries.find(b=>b.id!==g.dest);op(g.id,o.id,'receive');draw()}
+function dupe(){const g=S.bags.find(x=>x.status==='CONSUMED');if(!g)return toast('کیسه مصرف‌شده‌ای نیست','w');op(g.id,g.dest,'consume');draw()}
+function cmp(){const b=rb2();S.complaints.push({id:id('CMP'),bakery:b.id,cat:'قیمت',t:Date.now(),status:'OPEN'});if(S.complaints.filter(c=>c.bakery===b.id).length>=3)alert_('G','COMPLAINT',b.id,'خوشه شکایت','شکایات متعدد',1);log('شهروند','CUSTOMER','COMPLAINT',b.id);save();toast('شکایت ثبت شد');draw()}
+function rules(){const r=S.rules,F=[['flourWarn','آستانه هشدار مغایرت آرد (٪)'],['flourCrit','آستانه بحرانی (٪)'],['spike','ضریب جهش فروش'],['burst','حد انباشت آفلاین'],['ratio','ضریب آرد به ازای هر نان (kg)']];
+ return `<div class="c"><div class="font-bold mb-2">مدیریت قوانین (قابل تنظیم)</div>${F.map(([k,l])=>`<div class="flex justify-between items-center mb-2 text-sm"><span>${l}</span><input class="b w-24" type="number" step="any" value="${r[k]}" onchange="S.rules['${k}']=+this.value;log('مدیر','NATIONAL_MANAGER','RULE',k,'',this.value);save();toast('قانون به‌روز شد')"></div>`).join('')}</div>`}
+function audit(){return `<div class="c sc"><table><tr><th>زمان</th><th>کاربر</th><th>عملیات</th><th>موجودیت</th><th>تغییر</th><th>نتیجه</th></tr>${S.audit.slice(0,80).map(a=>`<tr><td>${jd(a.t)}</td><td>${a.user}</td><td dir="ltr">${a.action}</td><td dir="ltr">${a.entity}</td><td>${a.old}${a.nw?' ← '+a.nw:''}</td><td>${a.res==='OK'?'✓':'✕ '+a.res}</td></tr>`).join('')}</table></div>`}
+function data(){const issues=[];S.bakeries.forEach(b=>{if(b.stock<0)issues.push('موجودی منفی: '+b.name)});S.bags.forEach(g=>{if(!bk(g.dest))issues.push('مقصد نامعتبر: '+g.id)});
+ return `<div class="c"><div class="font-bold mb-2">پشتیبان و بررسی سلامت داده</div><div class="flex flex-wrap gap-2 mb-3"><button class="btn" onclick="ex()">Export JSON</button><label class="btn g cursor-pointer">Import JSON<input type="file" accept=".json" class="hidden" onchange="im(this)"></label></div>
+ <div class="text-sm">${issues.length?issues.map(i=>`<div>⚠ ${i}</div>`).join(''):'✓ مشکل یکپارچگی داده یافت نشد.'}</div></div>`}
+function ex(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(S)],{type:'application/json'}));a.download='ardyar-backup.json';a.click()}
+function im(i){const f=i.files[0];if(!f)return;f.text().then(t=>{try{const d=JSON.parse(t);if(!d.bakeries||!d.bags)throw 0;S=d;save();toast('داده بازیابی شد');draw()}catch(e){toast('فایل نامعتبر است','e')}})}
+function T(){const r=document.documentElement;r.dataset.theme=r.dataset.theme==='dark'?'light':'dark'}
+const IC={dash:'<path d="M3 13h8V3H3zM13 21h8V11h-8zM13 3v6h8V3zM3 21h8v-6H3z"/>',scan:'<path d="M3 7V4h3M21 7V4h-3M3 17v3h3M21 17v3h-3M7 12h10"/>',bak:'<path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h1m4 0h1m-6 4h1m4 0h1"/>',alerts:'<path d="M10.6 3.5a1.6 1.6 0 0 1 2.8 0l8.4 14.6a1.6 1.6 0 0 1-1.4 2.4H3.6a1.6 1.6 0 0 1-1.4-2.4zM12 9.5v4M12 17h.01"/>',sim:'<path d="M5 3l14 9-14 9z"/>',rules:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>',audit:'<path d="M5 4h14v16H5zM9 9h6M9 13h6M9 17h3"/>',data:'<path d="M12 3v13m0 0-4-4m4 4 4-4M4 19h16"/>'};
+const DESC={dash:'وضعیت ملی زنجیره، ریسک نانوایی‌ها و صف بازرسی',scan:'اسکن یا ورود شناسه کیسه؛ شناسنامه و Timeline',bak:'ریسک، اعتماد و پرونده هر نانوایی',alerts:'هشدارها با شواهد و اقدام پیشنهادی',sim:'ساخت سناریوهای واقعی برای دمو',rules:'آستانه‌های قابل تنظیم موتور قوانین',audit:'ثبت تمام عملیات حساس',data:'پشتیبان‌گیری و سلامت داده'};
+function draw(){const oa=S.alerts.filter(a=>a.status==='OPEN').length;$('#nav').innerHTML='<div class="gl">منو</div>'+Object.keys(NAMES).map(k=>`<button class="ni ${k===page?'on':''}" onclick="go('${k}');document.getElementById('sb').classList.remove('open')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${IC[k]}</svg><span>${NAMES[k]}</span>${k==='alerts'&&oa?`<i>${fa(oa)}</i>`:''}</button>`).join('');$('#v').innerHTML=PAGES[page]();$('#pt').textContent=NAMES[page];$('#h1').textContent=NAMES[page];$('#hp').textContent=DESC[page];$('#net').textContent=navigator.onLine?'🟢 آنلاین':'🔴 حالت آفلاین'}
+addEventListener('online',draw);addEventListener('offline',draw);
+load();draw();
 </script></body></html>
